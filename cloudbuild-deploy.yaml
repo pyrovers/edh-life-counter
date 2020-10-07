@@ -1,0 +1,19 @@
+steps:
+  - id: install-npm
+    name: node:12-slim
+    entrypoint: 'npm'
+    args:
+      - ci
+
+  - id: install-npm
+    name: node:12.13-slim
+    entrypoint: 'npm'
+    args: ['run', 'build']
+    waitFor:
+      - angular-unit-test
+
+  - id: deploy
+    name: gcr.io/${PROJECT_ID}/firebase
+    args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']
+    waitFor:
+      - angular-build
