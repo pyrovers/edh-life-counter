@@ -1,12 +1,12 @@
 steps:
   - id: install-npm
-    name: node:12-slim
+    name: node:16-slim
     entrypoint: 'npm'
     args:
       - ci
 
   - id: install-npm
-    name: node:12.13-slim
+    name: node:16-slim
     entrypoint: 'npm'
     args: ['run', 'build']
     waitFor:
