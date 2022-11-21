@@ -1,0 +1,30 @@
+{
+  "config": {
+    "initialLife": 40,
+    "playerCount": 4
+  },
+  "game": {
+    // 全体で一意なので個々に持たずにこちらで管理
+    "monarchPlayerIndex": null,
+    "initiativePlayerIndex": null,
+    "dayOrNight": null,
+    "players": [
+      {
+        "life": 40,
+        "commanderDamages": [0, 0, 0]
+      },
+      {
+        "life": 40,
+        "commanderDamages": [0, 0, 0]
+      },
+      {
+        "life": 40,
+        "commanderDamages": [0, 0, 0]
+      },
+      {
+        "life": 40,
+        "commanderDamages": [0, 0, 0]
+      }
+    ]
+  }
+}
