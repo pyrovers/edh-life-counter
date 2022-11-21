@@ -39,3 +39,10 @@
   font-weight: bold;
   font-size: 5rem;
 }
+
+.status {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  padding-inline-start: 0;
+}

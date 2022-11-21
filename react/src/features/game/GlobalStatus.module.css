@@ -1,0 +1,7 @@
+
+.globalStatus {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  padding-inline-start: 0;
+}

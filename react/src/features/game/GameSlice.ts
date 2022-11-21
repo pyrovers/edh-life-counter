@@ -11,6 +11,7 @@ export interface GameState {
 
 export interface PlayerInfo {
   life: number;
+  isAscend: boolean;
   commanderDamages: number[];
 }
 
@@ -22,6 +23,10 @@ export interface CommanderDamageInfo {
   targetPlayerIndex: number;
   opponentIndex: number;
   amount: number;
+}
+export interface CommanderDamageResetInfo {
+  targetPlayerIndex: number;
+  opponentIndex: number;
 }
 
 const initialState: GameState = {
@@ -41,12 +46,22 @@ export const gameSlice = createSlice({
     changeInitiativePlayer: (state, action: PayloadAction<number>) => {
       state.initiativePlayerIndex = action.payload;
     },
-    toggleDayOrNight: (state) => {
+    changeDay: (state) => {
+      state.dayOrNight = 'day';
+    },
+    changeNight: (state) => {
+      state.dayOrNight = 'night';
+    },
+    toggleDayOrNight: (state, action: PayloadAction<void>) => {
       state.dayOrNight = state.dayOrNight === 'night' ? 'day' : 'night';
     },
     incrementLife: (state, action: PayloadAction<DamageInfo>) => {
       state.players[action.payload.targetPlayerIndex].life +=
         action.payload.amount;
+    },
+    toggleAscend: (state, action: PayloadAction<number>) => {
+      state.players[action.payload].isAscend =
+        !state.players[action.payload].isAscend;
     },
     incrementCommanderDamage: (
       state,
@@ -56,12 +71,21 @@ export const gameSlice = createSlice({
         action.payload.opponentIndex
       ] += action.payload.amount;
     },
+    resetCommanderDamage: (
+      sate,
+      action: PayloadAction<CommanderDamageResetInfo>
+    ) => {
+      sate.players[action.payload.targetPlayerIndex].commanderDamages[
+        action.payload.opponentIndex
+      ] = 0;
+    },
     setNewGame: (state, action: PayloadAction<ConfigState>) => {
       const players: PlayerInfo[] = [];
       for (let i = 0; i < action.payload.playerCount; i++) {
         players.push({
           life: action.payload.initialLife,
           commanderDamages: [0, 0, 0, 0],
+          isAscend: false,
         });
       }
       state = {
@@ -77,9 +101,13 @@ export const {
   setNewGame,
   changeInitiativePlayer,
   changeMonarchPlayer,
+  changeDay,
+  changeNight,
   toggleDayOrNight,
   incrementLife,
   incrementCommanderDamage,
+  resetCommanderDamage,
+  toggleAscend,
 } = gameSlice.actions;
 
 export const selectMonarchPlayerIndex = (state: RootState) => {
@@ -108,6 +136,13 @@ export const selectCommanderDamage = (
   opponentIndex: number
 ) => {
   return state.game.players[playerIndex].commanderDamages[opponentIndex];
+};
+
+export const selectIsMonarchPlayer = (
+  state: RootState,
+  playerIndex: number
+) => {
+  return state.game.monarchPlayerIndex === playerIndex;
 };
 
 const gameReducer = gameSlice.reducer;
