@@ -81,4 +81,5 @@ export const incrementIfOdd =
     }
   };
 
-export default counterSlice.reducer;
+const counterReducer = counterSlice.reducer;
+export default counterReducer;
