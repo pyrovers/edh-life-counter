@@ -1,6 +1,8 @@
 import gameReducer, {
+  changeDay,
   changeInitiativePlayer,
   changeMonarchPlayer,
+  changeNight,
   GameState,
   incrementCommanderDamage,
   incrementLife,
@@ -99,6 +101,16 @@ describe('game reducer', () => {
     expect(actual1.dayOrNight).toBe('night');
     const actual2 = gameReducer(actual1, toggleDayOrNight());
     expect(actual2.dayOrNight).toBe('day');
+  });
+
+  it('昼にする', () => {
+    const actual1 = gameReducer(initialState, changeDay());
+    expect(actual1.dayOrNight).toBe('day');
+  });
+
+  it('夜にする', () => {
+    const actual1 = gameReducer(initialState, changeNight());
+    expect(actual1.dayOrNight).toBe('night');
   });
 
   it('統治者の切り替え', () => {

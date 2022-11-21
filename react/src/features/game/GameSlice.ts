@@ -46,6 +46,12 @@ export const gameSlice = createSlice({
     changeInitiativePlayer: (state, action: PayloadAction<number>) => {
       state.initiativePlayerIndex = action.payload;
     },
+    changeDay: (state) => {
+      state.dayOrNight = 'day';
+    },
+    changeNight: (state) => {
+      state.dayOrNight = 'night';
+    },
     toggleDayOrNight: (state, action: PayloadAction<void>) => {
       state.dayOrNight = state.dayOrNight === 'night' ? 'day' : 'night';
     },
@@ -95,6 +101,8 @@ export const {
   setNewGame,
   changeInitiativePlayer,
   changeMonarchPlayer,
+  changeDay,
+  changeNight,
   toggleDayOrNight,
   incrementLife,
   incrementCommanderDamage,
