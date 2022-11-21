@@ -10,20 +10,29 @@ type Props = {
 export const Spinner: FC<Props> = ({ ...props }) => {
   const dispatch = useAppDispatch();
 
+  const clickIncrement = () =>
+    dispatch(
+      incrementLife({
+        amount: props.step,
+        targetPlayerIndex: props.playerIndex,
+      })
+    );
+
+  const clickDecrement = () =>
+    dispatch(
+      incrementLife({
+        amount: -props.step,
+        targetPlayerIndex: props.playerIndex,
+      })
+    );
+
   return (
     <>
       <div className={styles.container}>
         <button
           type="button"
           className={styles.increment}
-          onClick={() =>
-            dispatch(
-              incrementLife({
-                amount: props.step,
-                targetPlayerIndex: props.playerIndex,
-              })
-            )
-          }
+          onClick={clickIncrement}
         >
           ▲
         </button>
@@ -33,14 +42,7 @@ export const Spinner: FC<Props> = ({ ...props }) => {
         <button
           type="button"
           className={styles.decrement}
-          onClick={() =>
-            dispatch(
-              incrementLife({
-                amount: -props.step,
-                targetPlayerIndex: props.playerIndex,
-              })
-            )
-          }
+          onClick={clickDecrement}
         >
           ▼
         </button>
