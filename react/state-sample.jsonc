@@ -3,28 +3,72 @@
     "initialLife": 40,
     "playerCount": 4
   },
+  // gameSlice
   "game": {
-    // 全体で一意なので個々に持たずにこちらで管理
-    "monarchPlayerIndex": null,
-    "initiativePlayerIndex": null,
-    "dayOrNight": null,
-    "players": [
-      {
-        "life": 40,
-        "commanderDamages": [0, 0, 0]
+    // globalSlice
+    "global": {
+      "monarchPlayerIndex": null,
+      "initiativePlayerIndex": null,
+      "dayOrNight": null
+    },
+
+    // playerSlice
+    "players": {
+      "byId": {
+        "player1": {
+          "id": "player1",
+          "life": 40,
+          "isAscend": false,
+          "commanderDamages": {
+            "byId": {
+              "player2": 0,
+              "player3": 0,
+              "player4": 0
+            },
+            "allIds": ["player2", "player3", "player4"]
+          }
+        },
+        "player2": {
+          "id": "player2",
+          "life": 40,
+          "isAscend": false,
+          "commanderDamages": {
+            "byId": {
+              "player1": 0,
+              "player3": 0,
+              "player4": 0
+            },
+            "allIds": ["player1", "player3", "player4"]
+          }
+        },
+        "player3": {
+          "id": "player3",
+          "life": 40,
+          "isAscend": false,
+          "commanderDamages": {
+            "byId": {
+              "player1": 0,
+              "player2": 0,
+              "player4": 0
+            },
+            "allIds": ["player1", "player2", "player4"]
+          }
+        },
+        "player4": {
+          "id": "player4",
+          "life": 40,
+          "isAscend": false,
+          "commanderDamages": {
+            "byId": {
+              "player1": 0,
+              "player2": 0,
+              "player3": 0
+            },
+            "allIds": ["player1", "player2", "player3"]
+          }
+        }
       },
-      {
-        "life": 40,
-        "commanderDamages": [0, 0, 0]
-      },
-      {
-        "life": 40,
-        "commanderDamages": [0, 0, 0]
-      },
-      {
-        "life": 40,
-        "commanderDamages": [0, 0, 0]
-      }
-    ]
+      "allIds": ["player1", "player2", "player3", "player4"]
+    }
   }
 }

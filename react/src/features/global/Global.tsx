@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { changeDay, changeNight, selectDayOrNight } from './GameSlice';
-import styles from './GlobalStatus.module.css';
+import { changeDay, changeNight, selectDayOrNight } from './GlobalSlice';
+import styles from './Global.module.css';
 
-export const GlobalStatus = () => {
+export const Global = () => {
   const dayOrNight = useAppSelector(selectDayOrNight);
 
   const dispatch = useAppDispatch();
@@ -18,6 +18,7 @@ export const GlobalStatus = () => {
               value="day"
               checked={dayOrNight === 'day'}
               onClick={() => dispatch(changeDay())}
+              readOnly={true}
             />
             day
           </label>
@@ -28,6 +29,7 @@ export const GlobalStatus = () => {
               value="night"
               checked={dayOrNight === 'night'}
               onClick={() => dispatch(changeNight())}
+              readOnly={true}
             />
             night
           </label>

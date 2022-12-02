@@ -1,9 +1,9 @@
 import { useAppSelector } from '../../app/hooks';
 import { Config } from '../config/Config';
-import { selectPlayers } from './GameSlice';
-import { Player } from './Player';
+import { PlayerData, selectPlayers } from '../player/PlayerSlice';
+import { Player } from '../player/Player';
 import styles from './Game.module.css';
-import { GlobalStatus } from './GlobalStatus';
+import { Global } from '../global/Global';
 
 export const Game = () => {
   const players = useAppSelector(selectPlayers);
@@ -11,21 +11,19 @@ export const Game = () => {
   return (
     <>
       <div className={styles.configArea}>
-        {players.length === 0 && <Config />}
+        {players.allIds.length === 0 && <Config />}
       </div>
 
-      {players.length !== 0 && (
+      {players.allIds.length !== 0 && (
         <>
           <div className={styles.playerArea}>
-            {players.map((player, playerIndex) => (
-              <Player
-                key={playerIndex}
-                player={player}
-                playerIndex={playerIndex}
-              />
-            ))}
+            {players.allIds
+              .map((playerId) => players.byId[playerId] as PlayerData)
+              .map((player) => (
+                <Player key={player.id} player={player} />
+              ))}
           </div>
-          <GlobalStatus />
+          <Global />
         </>
       )}
     </>
