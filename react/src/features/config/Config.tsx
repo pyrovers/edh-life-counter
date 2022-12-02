@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setNewGame } from '../game/GameSlice';
+import { initializeGlobal } from '../global/GlobalSlice';
+import { initializePlayers } from '../player/PlayerSlice';
 import {
-  initialState,
   selectInitialLife,
   selectPlayerCount,
   setInitialLife,
@@ -31,8 +31,9 @@ export function Config() {
 
   const submit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    dispatch(initializeGlobal({}));
     dispatch(
-      setNewGame({
+      initializePlayers({
         playerCount,
         initialLife,
       })

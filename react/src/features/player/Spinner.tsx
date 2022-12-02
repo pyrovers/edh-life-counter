@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-import { incrementLife } from './GameSlice';
+import { incrementLife, PlayerId } from './PlayerSlice';
 import styles from './Spinner.module.css';
 
 type Props = {
   step: 1 | 5 | 10;
-  playerIndex: number;
+  playerId: PlayerId;
 };
 export const Spinner: FC<Props> = ({ ...props }) => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export const Spinner: FC<Props> = ({ ...props }) => {
     dispatch(
       incrementLife({
         amount: props.step,
-        targetPlayerIndex: props.playerIndex,
+        targetPlayerId: props.playerId,
       })
     );
 
@@ -22,7 +22,7 @@ export const Spinner: FC<Props> = ({ ...props }) => {
     dispatch(
       incrementLife({
         amount: -props.step,
-        targetPlayerIndex: props.playerIndex,
+        targetPlayerId: props.playerId,
       })
     );
 
