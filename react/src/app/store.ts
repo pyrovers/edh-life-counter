@@ -1,5 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
+import { getLocalStorageValue, statePersistentMiddleware } from './persistent';
+
 import configReducer from '../features/config/ConfigSlice';
 import gameReducer from '../features/game/GameSlice';
 
@@ -8,6 +10,10 @@ export const store = configureStore({
     config: configReducer,
     game: gameReducer,
   },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().prepend(statePersistentMiddleware.middleware);
+  },
+  preloadedState: getLocalStorageValue(),
 });
 
 export type AppDispatch = typeof store.dispatch;

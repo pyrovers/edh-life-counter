@@ -1,0 +1,23 @@
+
+.dialogBg {
+  position: fixed;
+  background-color: #00000099;
+  height: 100dvh;
+  width: 100dvw;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialogContent {
+  max-height: 50svh;
+  max-width: 50svw;
+  height: 30vh;
+  width: 40vh;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+}

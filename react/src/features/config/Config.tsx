@@ -32,13 +32,7 @@ export function Config() {
   const submit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     dispatch(initializeGlobal({}));
-    dispatch(
-      initializePlayers({
-        playerCount,
-        initialLife,
-      })
-    );
-    // TODO: Save to Local Storage.
+    dispatch(initializePlayers());
   };
 
   return (
