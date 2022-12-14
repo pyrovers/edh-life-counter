@@ -1,50 +1,64 @@
 
 .player1-2 {
   transform: rotate(180deg);
-  grid-column: 1 / 2;
-  grid-row: 1;
+  height: 50dvh;
+  width: 100dvw;
 }
 .player2-2 {
   transform: rotate(0deg);
-  grid-column: 1/2;
-  grid-row: 2;
+  height: 50dvh;
+  width: 100dvw;
 }
 
 .player1-3 {
   transform: rotate(180deg);
-  grid-column: 1;
-  grid-row: 1;
+  height: 50dvh;
+  width: 60dvw;
 }
 .player2-3 {
   transform: rotate(0deg);
-  grid-column: 1;
-  grid-row: 2;
+  height: 50dvh;
+  width: 60dvw;
 }
 .player3-3 {
-  transform: rotate(180deg);
-  grid-column: 2;
-  grid-row: 1;
+  transform: rotate(270deg);
+  height: 40dvw;
+  width: 100dvh;
+  position: fixed;
+  top: calc(-40dvw / 2 + 100dvh / 2);
+  right: calc(-100dvh / 2 + 40dvw / 2);
 }
 
 .player1-4 {
   transform: rotate(180deg);
-  grid-column: 1;
-  grid-row: 1;
+  height: 50dvh;
+  width: 40dvw;
+  position: fixed;
+  left: 30dvw;
 }
 .player2-4 {
   transform: rotate(0deg);
-  grid-column: 1;
-  grid-row: 2;
+  height: 50dvh;
+  width: 40dvw;
+  position: fixed;
+  left: 30dvw;
+  bottom: 0;
 }
 .player3-4 {
-  transform: rotate(180deg);
-  grid-column: 2;
-  grid-row: 1;
+  transform: rotate(270deg);
+  height: 30dvw;
+  width: 100dvh;
+  position: fixed;
+  top: calc(-30dvw / 2 + 100dvh / 2);
+  right: calc(-100dvh / 2 + 30dvw / 2);
 }
 .player4-4 {
-  transform: rotate(0deg);
-  grid-column: 2;
-  grid-row: 2;
+  transform: rotate(90deg);
+  height: 30dvw;
+  width: 100dvh;
+  position: fixed;
+  top: calc(-30dvw / 2 + 100dvh / 2);
+  left: calc(-100dvh / 2 + 30dvw / 2);
 }
 
 .container {
