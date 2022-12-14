@@ -20,10 +20,16 @@ export const Game = () => {
             {players.allIds
               .map((playerId) => players.byId[playerId] as PlayerData)
               .map((player) => (
-                <Player key={player.id} player={player} />
+                <Player
+                  key={player.id}
+                  player={player}
+                  playerCount={players.allIds.length}
+                />
               ))}
           </div>
-          <Global />
+          <div className={styles.globalArea}>
+            <Global />
+          </div>
         </>
       )}
     </>

@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 type Props = {
   player: PlayerData;
+  playerCount: number;
 };
 export const Player: FC<Props> = ({ ...props }) => {
   const monarchPlayerId = useAppSelector(selectMonarchPlayerId);
@@ -49,7 +50,13 @@ export const Player: FC<Props> = ({ ...props }) => {
   };
 
   return (
-    <div className={[styles.container, `player-${props.player.id}`].join(' ')}>
+    <div
+      className={[
+        styles.container,
+        styles[props.player.id],
+        styles[`${props.player.id}-${props.playerCount}`],
+      ].join(' ')}
+    >
       <ul className={styles.commanderDamages}>
         {props.player.commanderDamages.allIds.map((opponentId) => (
           <li
@@ -58,7 +65,9 @@ export const Player: FC<Props> = ({ ...props }) => {
               clickCommanderDamage(props.player.id, opponentId);
             }}
           >
-            <button>
+            <button
+              className={[styles.commanderDamage, styles[opponentId]].join(' ')}
+            >
               {props.player.commanderDamages.byId[opponentId]?.damage}
             </button>
           </li>
