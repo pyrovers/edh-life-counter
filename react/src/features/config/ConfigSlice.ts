@@ -15,20 +15,23 @@ export const ConfigSlice = createSlice({
   name: 'config',
   initialState,
   reducers: {
-    setInitialLife: (state, action: PayloadAction<number>) => {
-      state.initialLife = action.payload;
+    setInitialLife: (config, action: PayloadAction<number>) => {
+      config.initialLife = action.payload;
     },
-    setPlayerCount: (state, action: PayloadAction<number>) => {
-      state.playerCount = action.payload;
+    setPlayerCount: (config, action: PayloadAction<number>) => {
+      config.playerCount = action.payload;
     },
   },
-  // TODO: Effect (Save to Local Storage)
 });
 
 export const { setInitialLife, setPlayerCount } = ConfigSlice.actions;
 
-export const selectInitialLife = (state: RootState) => state.config.initialLife;
-export const selectPlayerCount = (state: RootState) => state.config.playerCount;
+export const selectInitialLife = (rootState: RootState) => {
+  return rootState.config.initialLife;
+};
+export const selectPlayerCount = (rootState: RootState) => {
+  return rootState.config.playerCount;
+};
 
 export const configReducer = ConfigSlice.reducer;
 export default configReducer;

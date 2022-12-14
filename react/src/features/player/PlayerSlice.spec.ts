@@ -76,10 +76,10 @@ describe('player reducer', () => {
   });
 
   it('プレイヤー情報の初期化 - 2人', () => {
-    const actual = playerReducer(
-      initialState,
-      initializePlayers({ initialLife: 40, playerCount: 2 })
-    );
+    const actual = playerReducer(initialState, {
+      type: initializePlayers.fulfilled.type,
+      payload: { initialLife: 40, playerCount: 2 },
+    });
     expect(actual.allIds.length).toBe(2);
     expect(actual.allIds.includes('player1')).toBeTruthy();
     expect(actual.allIds.includes('player2')).toBeTruthy();
@@ -105,10 +105,10 @@ describe('player reducer', () => {
   });
 
   it('プレイヤー情報の初期化 - 3人', () => {
-    const actual = playerReducer(
-      initialState,
-      initializePlayers({ initialLife: 30, playerCount: 3 })
-    );
+    const actual = playerReducer(initialState, {
+      type: initializePlayers.fulfilled.type,
+      payload: { initialLife: 30, playerCount: 3 },
+    });
     expect(actual.allIds.length).toBe(3);
     expect(actual.allIds.includes('player1')).toBeTruthy();
     expect(actual.allIds.includes('player2')).toBeTruthy();
@@ -141,10 +141,10 @@ describe('player reducer', () => {
   });
 
   it('プレイヤー情報の初期化 - 4人', () => {
-    const actual = playerReducer(
-      initialState,
-      initializePlayers({ initialLife: 20, playerCount: 4 })
-    );
+    const actual = playerReducer(initialState, {
+      type: initializePlayers.fulfilled.type,
+      payload: { initialLife: 20, playerCount: 4 },
+    });
     expect(actual.allIds.length).toBe(4);
     expect(actual.allIds.includes('player1')).toBeTruthy();
     expect(actual.allIds.includes('player2')).toBeTruthy();

@@ -1,4 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { GameMenu } from '../gameMenu/GameMenu';
+
 import { changeDay, changeNight, selectDayOrNight } from './GlobalSlice';
 import styles from './Global.module.css';
 
@@ -34,6 +36,9 @@ export const Global = () => {
             night
           </label>
         </fieldset>
+      </li>
+      <li>
+        <GameMenu />
       </li>
     </ul>
   );

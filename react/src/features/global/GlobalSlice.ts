@@ -18,23 +18,26 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-    initializeGlobal: (state, action) => {
-      return { ...state, ...initialState };
+    initializeGlobal: (global, action) => {
+      return { ...global, ...initialState };
     },
-    changeMonarchPlayer: (state, action: PayloadAction<PlayerId>) => {
-      state.monarchPlayerId = action.payload;
+    changeMonarchPlayer: (global, action: PayloadAction<PlayerId>) => {
+      global.monarchPlayerId = action.payload;
     },
-    changeInitiativePlayer: (state, action: PayloadAction<PlayerId>) => {
-      state.initiativePlayerId = action.payload;
+    changeInitiativePlayer: (global, action: PayloadAction<PlayerId>) => {
+      global.initiativePlayerId = action.payload;
     },
-    changeDay: (state) => {
-      state.dayOrNight = 'day';
+    changeDay: (global) => {
+      global.dayOrNight = 'day';
     },
-    changeNight: (state) => {
-      state.dayOrNight = 'night';
+    changeNight: (global) => {
+      global.dayOrNight = 'night';
     },
-    toggleDayOrNight: (state, action: PayloadAction<void>) => {
-      state.dayOrNight = state.dayOrNight === 'night' ? 'day' : 'night';
+    toggleDayOrNight: (global, action: PayloadAction<void>) => {
+      global.dayOrNight = global.dayOrNight === 'night' ? 'day' : 'night';
+    },
+    unsetGlobal: () => {
+      return initialState;
     },
   },
 });
@@ -46,22 +49,26 @@ export const {
   changeDay,
   changeNight,
   toggleDayOrNight,
+  unsetGlobal,
 } = globalSlice.actions;
 
-export const selectMonarchPlayerId = (state: RootState) => {
-  return state.game.global.monarchPlayerId;
+export const selectMonarchPlayerId = (rootState: RootState) => {
+  return rootState.game.global.monarchPlayerId;
 };
 
-export const selectInitiativePlayerId = (state: RootState) => {
-  return state.game.global.initiativePlayerId;
+export const selectInitiativePlayerId = (rootState: RootState) => {
+  return rootState.game.global.initiativePlayerId;
 };
 
-export const selectDayOrNight = (state: RootState) => {
-  return state.game.global.dayOrNight;
+export const selectDayOrNight = (rootState: RootState) => {
+  return rootState.game.global.dayOrNight;
 };
 
-export const selectIsMonarchPlayer = (state: RootState, playerId: PlayerId) => {
-  return state.game.global.monarchPlayerId === playerId;
+export const selectIsMonarchPlayer = (
+  rootState: RootState,
+  playerId: PlayerId
+) => {
+  return rootState.game.global.monarchPlayerId === playerId;
 };
 
 const globalReducer = globalSlice.reducer;

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { ConfigState } from '../config/ConfigSlice';
 
@@ -53,63 +53,70 @@ const initialState: PlayersState = {
   allIds: [],
 };
 
+const generatePlayers = (playerCount: number, initialLife: number) => {
+  const allIds = Object.values(PlayerId).filter(
+    (id, index) => index < playerCount
+  );
+
+  const players: PlayerData[] = allIds.map((playerId) => {
+    const commanderDamages = {
+      allIds: allIds.filter((id) => id !== playerId),
+      byId: {} as { [key in PlayerId]?: CommanderDamageData },
+    };
+    commanderDamages.allIds.forEach((opponentId) => {
+      commanderDamages.byId[opponentId] = { id: opponentId, damage: 0 };
+    });
+
+    return {
+      id: playerId,
+      isAscend: false,
+      life: initialLife,
+      commanderDamages,
+    };
+  });
+
+  const byId: PlayerKeyValue<PlayerData> = {};
+  players.forEach((player) => {
+    byId[player.id] = player;
+  });
+
+  return {
+    ...initialState,
+    allIds,
+    byId,
+  };
+};
+
+export const initializePlayers = createAsyncThunk(
+  `player/initializePlayers`,
+  async (player, { getState }) => {
+    return (getState() as RootState).config;
+  }
+);
+
 export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    initializePlayers: (state, action: PayloadAction<ConfigState>) => {
-      const allIds = Object.values(PlayerId).filter(
-        (id, index) => index < action.payload.playerCount
-      );
-
-      const players: PlayerData[] = allIds.map((playerId) => {
-        const commanderDamages = {
-          allIds: allIds.filter((id) => id !== playerId),
-          byId: {} as { [key in PlayerId]?: CommanderDamageData },
-        };
-        commanderDamages.allIds.forEach((opponentId) => {
-          commanderDamages.byId[opponentId] = { id: opponentId, damage: 0 };
-        });
-
-        return {
-          id: playerId,
-          isAscend: false,
-          life: action.payload.initialLife,
-          commanderDamages,
-        };
-      });
-
-      const byId: PlayerKeyValue<PlayerData> = {};
-      players.forEach((player) => {
-        byId[player.id] = player;
-      });
-
-      state = {
-        ...initialState,
-        allIds,
-        byId,
-      };
-      return state;
-    },
-    incrementLife: (state, action: PayloadAction<DamageInfo>) => {
-      const targetPlayer = state.byId[action.payload.targetPlayerId];
+    incrementLife: (player, action: PayloadAction<DamageInfo>) => {
+      const targetPlayer = player.byId[action.payload.targetPlayerId];
       if (!targetPlayer) {
         return;
       }
       targetPlayer.life += action.payload.amount;
     },
-    toggleAscend: (state, action: PayloadAction<PlayerId>) => {
-      const targetPlayer = state.byId[action.payload];
+    toggleAscend: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
       if (!targetPlayer) {
         return;
       }
       targetPlayer.isAscend = !targetPlayer.isAscend;
     },
     incrementCommanderDamage: (
-      state,
+      player,
       action: PayloadAction<CommanderDamageInfo>
     ) => {
-      const targetPlayer = state.byId[action.payload.targetPlayerId];
+      const targetPlayer = player.byId[action.payload.targetPlayerId];
       if (!targetPlayer) {
         return;
       }
@@ -121,10 +128,10 @@ export const playerSlice = createSlice({
       damageOpponent.damage += action.payload.amount;
     },
     resetCommanderDamage: (
-      state,
+      player,
       action: PayloadAction<CommanderDamageResetInfo>
     ) => {
-      const targetPlayer = state.byId[action.payload.targetPlayerId];
+      const targetPlayer = player.byId[action.payload.targetPlayerId];
       if (!targetPlayer) {
         return;
       }
@@ -135,31 +142,47 @@ export const playerSlice = createSlice({
       }
       damageOpponent.damage = 0;
     },
+    unsetPlayers: () => {
+      return initialState;
+    },
+  },
+  extraReducers(builder) {
+    builder.addCase(
+      initializePlayers.fulfilled,
+      (player, action: PayloadAction<ConfigState>) => {
+        return generatePlayers(
+          action.payload.playerCount,
+          action.payload.initialLife
+        );
+      }
+    );
   },
 });
 
 export const {
-  initializePlayers,
   incrementLife,
   incrementCommanderDamage,
   resetCommanderDamage,
   toggleAscend,
+  unsetPlayers,
 } = playerSlice.actions;
 
-export const selectPlayers = (state: RootState) => {
-  return state.game.players;
+export const selectPlayers = (rootState: RootState) => {
+  return rootState.game.players;
 };
 
-export const selectLife = (state: RootState, playerId: PlayerId) => {
-  return state.game.players.byId[playerId]?.life;
+export const selectLife = (rootState: RootState, playerId: PlayerId) => {
+  return rootState.game.players.byId[playerId]?.life;
 };
 
 export const selectCommanderDamage = (
-  state: RootState,
+  rootState: RootState,
   playerId: PlayerId,
   opponentId: PlayerId
 ) => {
-  return state.game.players.byId[playerId]?.commanderDamages.byId[opponentId];
+  return rootState.game.players.byId[playerId]?.commanderDamages.byId[
+    opponentId
+  ];
 };
 
 const playerReducer = playerSlice.reducer;
