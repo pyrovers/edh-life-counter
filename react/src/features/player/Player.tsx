@@ -61,6 +61,7 @@ export const Player: FC<Props> = ({ ...props }) => {
         {props.player.commanderDamages.allIds.map((opponentId) => (
           <li
             key={opponentId}
+            className={styles[`${props.player.id}-${opponentId}`]}
             onClick={() => {
               clickCommanderDamage(props.player.id, opponentId);
             }}

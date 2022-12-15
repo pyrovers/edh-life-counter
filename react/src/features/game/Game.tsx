@@ -10,9 +10,11 @@ export const Game = () => {
 
   return (
     <>
-      <div className={styles.configArea}>
-        {players.allIds.length === 0 && <Config />}
-      </div>
+      {players.allIds.length === 0 && (
+        <div className={styles.configArea}>
+          <Config />
+        </div>
+      )}
 
       {players.allIds.length !== 0 && (
         <>
