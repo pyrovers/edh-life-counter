@@ -10,9 +10,11 @@ export const Game = () => {
 
   return (
     <>
-      <div className={styles.configArea}>
-        {players.allIds.length === 0 && <Config />}
-      </div>
+      {players.allIds.length === 0 && (
+        <div className={styles.configArea}>
+          <Config />
+        </div>
+      )}
 
       {players.allIds.length !== 0 && (
         <>
@@ -20,10 +22,16 @@ export const Game = () => {
             {players.allIds
               .map((playerId) => players.byId[playerId] as PlayerData)
               .map((player) => (
-                <Player key={player.id} player={player} />
+                <Player
+                  key={player.id}
+                  player={player}
+                  playerCount={players.allIds.length}
+                />
               ))}
           </div>
-          <Global />
+          <div className={styles.globalArea}>
+            <Global />
+          </div>
         </>
       )}
     </>

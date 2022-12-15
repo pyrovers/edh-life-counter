@@ -7,6 +7,7 @@ import {
   setInitialLife,
   setPlayerCount,
 } from './ConfigSlice';
+import styles from './Config.module.css';
 
 export function Config() {
   const dispatch = useAppDispatch();
@@ -37,9 +38,10 @@ export function Config() {
 
   return (
     <>
-      <form onSubmit={submit}>
-        <div>
-          <label htmlFor="playerCount">Player Count</label>
+      <form className={styles.form} onSubmit={submit}>
+        <h2>ゲーム設定</h2>
+        <div className={styles.inputField}>
+          <label htmlFor="playerCount">プレイ人数</label>
           <input
             type="number"
             name="playerCount"
@@ -49,8 +51,8 @@ export function Config() {
             onChange={(e) => changePlayerCount(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="initialLife">Default Life</label>
+        <div className={styles.inputField}>
+          <label htmlFor="initialLife">初期ライフ</label>
           <input
             type="number"
             name="initialLife"

@@ -1,8 +1,22 @@
 
 .configArea {
-
+  height: 100dvh;
+  width: 100dvw;
+  display: flex;
 }
 
 .playerArea {
-  display: grid;
+  height: 100dvh;
+  width: 100dvw;
+}
+
+.globalArea {
+  border: 2px solid #ccc;
+  position: fixed;
+  display: flex;
+  background-color: #fff;
+  top: calc(100dvh / 2 - 6dvh);
+  left: calc(100dvw / 2 - 10dvw);
+  width: 20dvw;
+  height: 12dvh;
 }

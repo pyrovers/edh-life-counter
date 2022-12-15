@@ -1,7 +1,10 @@
 
 .globalStatus {
   display: flex;
+  box-sizing: border-box;
   list-style: none;
   justify-content: center;
   padding-inline-start: 0;
+  width: 100%;
+  height: 100%;
 }
