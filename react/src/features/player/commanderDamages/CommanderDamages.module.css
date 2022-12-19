@@ -2,7 +2,7 @@
   list-style: none;
   padding-inline-start: 0;
   display: inline-grid;
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 .commanderDamages li {
@@ -98,4 +98,5 @@
   font-size: inherit;
   font-size: 2vw;
   min-width: 2em;
+  border-radius: 1em;
 }

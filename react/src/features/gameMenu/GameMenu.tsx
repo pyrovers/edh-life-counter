@@ -28,7 +28,7 @@ export const GameMenu = () => {
   return (
     <>
       <div className={styles.settingOpener}>
-        <IconButton onClick={() => setIsShowDialog(true)}>settings</IconButton>
+        <IconButton icon="gear" onClick={() => setIsShowDialog(true)} />
       </div>
 
       {isShowDialog && (

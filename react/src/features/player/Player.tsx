@@ -56,30 +56,27 @@ export const Player: FC<Props> = ({ ...props }) => {
       <ul className={styles.status}>
         <li>
           <IconButton
+            icon="scroll"
             type="button"
             isActive={initiativePlayerId === props.player.id}
             onClick={clickChangeInitiative}
-          >
-            explore
-          </IconButton>
+          />
         </li>
         <li>
           <IconButton
+            icon="crown"
             type="button"
             isActive={monarchPlayerId === props.player.id}
             onClick={clickChangeMonarch}
-          >
-            castle
-          </IconButton>
+          />
         </li>
         <li>
           <IconButton
+            icon="people-line"
             type="button"
             isActive={props.player.isAscend}
             onClick={clickToggleAscend}
-          >
-            10k
-          </IconButton>
+          />
         </li>
       </ul>
     </div>

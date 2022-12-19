@@ -30,15 +30,17 @@ export const Spinner: FC<Props> = ({ ...props }) => {
   return (
     <>
       <div className={styles.container}>
-        <IconButton type="button" onClick={clickIncrement}>
-          keyboard_arrow_up
-        </IconButton>
-
+        <div>
+          <IconButton icon="caret-up" type="button" onClick={clickIncrement} />
+        </div>
         <span className={styles.step}>{props.step}</span>
-
-        <IconButton type="button" onClick={clickDecrement}>
-          keyboard_arrow_down
-        </IconButton>
+        <div>
+          <IconButton
+            icon="caret-down"
+            type="button"
+            onClick={clickDecrement}
+          />
+        </div>
       </div>
     </>
   );
