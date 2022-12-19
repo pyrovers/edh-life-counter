@@ -14,14 +14,25 @@ type Props = {
   onClick?: <E>(e: E) => void;
 };
 export const IconButton: FC<Props> = ({ ...props }) => {
+  const [ripple, setRipple] = useState(false);
+
+  const spreadRipple = () => {
+    setRipple(true);
+    setTimeout(() => {
+      setRipple(false);
+    }, 300);
+  };
+
   return (
     <button
       type={props.type || 'submit'}
       className={[
         styles.IconButton,
         props.isActive ? [styles.Active] : '',
+        ripple ? [styles.Ripple] : '',
       ].join(' ')}
       onClick={(e) => {
+        spreadRipple();
         if (props.onClick) props.onClick(e);
       }}
     >
