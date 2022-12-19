@@ -1,3 +1,46 @@
+.player1 {
+  color: var(--player1-dark-color);
+  border-color: var(--player1-dark-color);
+  background-color: var(--player1-light-color);
+}
+.night.player1 {
+  color: var(--player1-light-color);
+  border-color: var(--player1-dark-color);
+  background-color: var(--player1-dark-color);
+}
+
+.player2 {
+  color: var(--player2-dark-color);
+  border-color: var(--player2-dark-color);
+  background-color: var(--player2-light-color);
+}
+.night.player2 {
+  color: var(--player2-light-color);
+  border-color: var(--player2-dark-color);
+  background-color: var(--player2-dark-color);
+}
+
+.player3 {
+  color: var(--player3-dark-color);
+  border-color: var(--player3-dark-color);
+  background-color: var(--player3-light-color);
+}
+.night.player3 {
+  color: var(--player3-light-color);
+  border-color: var(--player3-dark-color);
+  background-color: var(--player3-dark-color);
+}
+
+.player4 {
+  color: var(--player4-dark-color);
+  border-color: var(--player4-dark-color);
+  background-color: var(--player4-light-color);
+}
+.night.player4 {
+  color: var(--player4-light-color);
+  border-color: var(--player4-dark-color);
+  background-color: var(--player4-dark-color);
+}
 
 .player1-2 {
   transform: rotate(180deg);
@@ -68,105 +111,6 @@
   flex-direction: column;
   justify-content: center;
 }
-.container.player1 {
-  color: var(--player1-base-color);
-  border-color: var(--player1-base-color);
-  background-color: var(--player1-bg-color);
-}
-.container.player2 {
-  color: var(--player2-base-color);
-  border-color: var(--player2-base-color);
-  background-color: var(--player2-bg-color);
-}
-.container.player3 {
-  color: var(--player3-base-color);
-  border-color: var(--player3-base-color);
-  background-color: var(--player3-bg-color);
-}
-.container.player4 {
-  color: var(--player4-base-color);
-  border-color: var(--player4-base-color);
-  background-color: var(--player4-bg-color);
-}
-
-.commanderDamages {
-  list-style: none;
-  padding-inline-start: 0;
-  display: inline-grid;
-  width: 80%;
-  margin: 0 auto;
-}
-.commanderDamages li {
-  grid-row: 1;
-  text-align: center;
-}
-
-.player1-player2 {
-  grid-column: 2;
-}
-.player1-player3 {
-  grid-column: 1;
-}
-.player1-player4 {
-  grid-column: 3;
-}
-
-.player2-player1 {
-  grid-column: 2;
-}
-.player2-player3 {
-  grid-column: 3;
-}
-.player2-player4 {
-  grid-column: 1;
-}
-
-.player3-player1 {
-  grid-column: 1;
-}
-.player3-player2 {
-  grid-column: 3;
-}
-.player3-player4 {
-  grid-column: 2;
-}
-
-.player4-player1 {
-  grid-column: 1;
-}
-.player4-player2 {
-  grid-column: 3;
-}
-.player4-player3 {
-  grid-column: 2;
-}
-
-.commanderDamage {
-  font-weight: bold;
-  border-radius: 4px;
-  border-width: 3px;
-  border-style: solid;
-}
-.commanderDamage.player1 {
-  color: var(--player1-base-color);
-  border-color: var(--player1-base-color);
-  background-color: var(--player1-bg-color);
-}
-.commanderDamage.player2 {
-  color: var(--player2-base-color);
-  border-color: var(--player2-base-color);
-  background-color: var(--player2-bg-color);
-}
-.commanderDamage.player3 {
-  color: var(--player3-base-color);
-  border-color: var(--player3-base-color);
-  background-color: var(--player3-bg-color);
-}
-.commanderDamage.player4 {
-  color: var(--player4-base-color);
-  border-color: var(--player4-base-color);
-  background-color: var(--player4-bg-color);
-}
 
 .lifeCounter {
   display: flex;
@@ -176,12 +120,20 @@
 
 .life {
   font-weight: bold;
-  font-size: 5rem;
+  font-size: 10vw;
+  width: 2em;
+  text-align: center;
 }
 
 .status {
   display: flex;
   list-style: none;
-  justify-content: center;
+  justify-content: space-evenly;
   padding-inline-start: 0;
+  font-size: 3vw;
+  width: 60%;
+  margin: 0 auto;
+}
+.status li {
+  display: flex;
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
+import { IconButton } from '../../components/IconButton';
 import { unsetGlobal } from '../global/GlobalSlice';
 import { initializePlayers, unsetPlayers } from '../player/PlayerSlice';
 
@@ -26,9 +27,9 @@ export const GameMenu = () => {
 
   return (
     <>
-      <button type="button" onClick={() => setIsShowDialog(true)}>
-        menu
-      </button>
+      <div className={styles.settingOpener}>
+        <IconButton onClick={() => setIsShowDialog(true)}>settings</IconButton>
+      </div>
 
       {isShowDialog && (
         <div className={styles.dialogBg} onClick={() => closeDialog()}>

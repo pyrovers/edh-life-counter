@@ -2,18 +2,16 @@ import { FC } from 'react';
 import {
   changeInitiativePlayer,
   changeMonarchPlayer,
+  selectDayOrNight,
   selectInitiativePlayerId,
   selectMonarchPlayerId,
 } from '../global/GlobalSlice';
-import {
-  incrementCommanderDamage,
-  PlayerId,
-  PlayerData,
-  toggleAscend,
-} from './PlayerSlice';
+import { PlayerData, toggleAscend } from './PlayerSlice';
 import { Spinner } from './Spinner';
 import styles from './Player.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { IconButton } from '../../components/IconButton';
+import { CommanderDamages } from './commanderDamages/CommanderDamages';
 
 type Props = {
   player: PlayerData;
@@ -22,20 +20,8 @@ type Props = {
 export const Player: FC<Props> = ({ ...props }) => {
   const monarchPlayerId = useAppSelector(selectMonarchPlayerId);
   const initiativePlayerId = useAppSelector(selectInitiativePlayerId);
+  const dayOrNight = useAppSelector(selectDayOrNight);
   const dispatch = useAppDispatch();
-
-  const clickCommanderDamage = (
-    targetPlayerId: PlayerId,
-    opponentId: PlayerId
-  ) => {
-    dispatch(
-      incrementCommanderDamage({
-        amount: 1,
-        opponentId,
-        targetPlayerId,
-      })
-    );
-  };
 
   const clickChangeMonarch = () => {
     dispatch(changeMonarchPlayer(props.player.id));
@@ -55,25 +41,13 @@ export const Player: FC<Props> = ({ ...props }) => {
         styles.container,
         styles[props.player.id],
         styles[`${props.player.id}-${props.playerCount}`],
+        dayOrNight === 'night' ? styles.night : '',
       ].join(' ')}
     >
-      <ul className={styles.commanderDamages}>
-        {props.player.commanderDamages.allIds.map((opponentId) => (
-          <li
-            key={opponentId}
-            className={styles[`${props.player.id}-${opponentId}`]}
-            onClick={() => {
-              clickCommanderDamage(props.player.id, opponentId);
-            }}
-          >
-            <button
-              className={[styles.commanderDamage, styles[opponentId]].join(' ')}
-            >
-              {props.player.commanderDamages.byId[opponentId]?.damage}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <CommanderDamages
+        playerId={props.player.id}
+        data={props.player.commanderDamages}
+      />
       <div className={styles.lifeCounter}>
         <Spinner step={1} playerId={props.player.id} />
         <div className={styles.life}>{props.player.life}</div>
@@ -81,21 +55,31 @@ export const Player: FC<Props> = ({ ...props }) => {
       </div>
       <ul className={styles.status}>
         <li>
-          <button type="button" onClick={clickChangeMonarch}>
-            {`monarch: ${monarchPlayerId === props.player.id ? 'yes' : 'no'}`}
-          </button>
+          <IconButton
+            type="button"
+            isActive={initiativePlayerId === props.player.id}
+            onClick={clickChangeInitiative}
+          >
+            explore
+          </IconButton>
         </li>
         <li>
-          <button type="button" onClick={clickChangeInitiative}>
-            {`initiative: ${
-              initiativePlayerId === props.player.id ? 'yes' : 'no'
-            }`}
-          </button>
+          <IconButton
+            type="button"
+            isActive={monarchPlayerId === props.player.id}
+            onClick={clickChangeMonarch}
+          >
+            castle
+          </IconButton>
         </li>
         <li>
-          <button type="button" onClick={clickToggleAscend}>
-            {`ascend: ${props.player.isAscend ? 'yes' : 'no'}`}
-          </button>
+          <IconButton
+            type="button"
+            isActive={props.player.isAscend}
+            onClick={clickToggleAscend}
+          >
+            10k
+          </IconButton>
         </li>
       </ul>
     </div>
