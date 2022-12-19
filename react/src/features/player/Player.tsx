@@ -2,6 +2,7 @@ import { FC } from 'react';
 import {
   changeInitiativePlayer,
   changeMonarchPlayer,
+  selectDayOrNight,
   selectInitiativePlayerId,
   selectMonarchPlayerId,
 } from '../global/GlobalSlice';
@@ -14,6 +15,7 @@ import {
 import { Spinner } from './Spinner';
 import styles from './Player.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { CommanderDamages } from './commanderDamages/CommanderDamages';
 
 type Props = {
   player: PlayerData;
@@ -22,20 +24,8 @@ type Props = {
 export const Player: FC<Props> = ({ ...props }) => {
   const monarchPlayerId = useAppSelector(selectMonarchPlayerId);
   const initiativePlayerId = useAppSelector(selectInitiativePlayerId);
+  const dayOrNight = useAppSelector(selectDayOrNight);
   const dispatch = useAppDispatch();
-
-  const clickCommanderDamage = (
-    targetPlayerId: PlayerId,
-    opponentId: PlayerId
-  ) => {
-    dispatch(
-      incrementCommanderDamage({
-        amount: 1,
-        opponentId,
-        targetPlayerId,
-      })
-    );
-  };
 
   const clickChangeMonarch = () => {
     dispatch(changeMonarchPlayer(props.player.id));
@@ -55,25 +45,13 @@ export const Player: FC<Props> = ({ ...props }) => {
         styles.container,
         styles[props.player.id],
         styles[`${props.player.id}-${props.playerCount}`],
+        dayOrNight === 'night' ? styles.night : '',
       ].join(' ')}
     >
-      <ul className={styles.commanderDamages}>
-        {props.player.commanderDamages.allIds.map((opponentId) => (
-          <li
-            key={opponentId}
-            className={styles[`${props.player.id}-${opponentId}`]}
-            onClick={() => {
-              clickCommanderDamage(props.player.id, opponentId);
-            }}
-          >
-            <button
-              className={[styles.commanderDamage, styles[opponentId]].join(' ')}
-            >
-              {props.player.commanderDamages.byId[opponentId]?.damage}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <CommanderDamages
+        playerId={props.player.id}
+        data={props.player.commanderDamages}
+      />
       <div className={styles.lifeCounter}>
         <Spinner step={1} playerId={props.player.id} />
         <div className={styles.life}>{props.player.life}</div>

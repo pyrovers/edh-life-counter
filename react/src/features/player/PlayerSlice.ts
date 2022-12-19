@@ -23,10 +23,12 @@ export interface PlayerData {
   id: PlayerId;
   life: number;
   isAscend: boolean;
-  commanderDamages: {
-    byId: PlayerKeyValue<CommanderDamageData>;
-    allIds: PlayerId[];
-  };
+  commanderDamages: CommanderDamageList;
+}
+
+export interface CommanderDamageList {
+  byId: PlayerKeyValue<CommanderDamageData>;
+  allIds: PlayerId[];
 }
 
 export interface CommanderDamageData {
