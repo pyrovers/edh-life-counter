@@ -1,0 +1,38 @@
+.fieldset {
+  color: var(--inactive-color);
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 3vw;
+  line-height: 1;
+  padding: 0.5vw 1vw;
+  border: 2px solid #ccc;
+  border-radius: 1vw;
+}
+
+.toggleDay,
+.toggleNight {
+  position: relative;
+}
+
+.toggleDay::after {
+  content: 'multiple_stop';
+  color: #999;
+}
+
+.toggleDay > input,
+.toggleNight > input {
+  width: 3vw;
+  height: 3vw;
+  appearance: none;
+  position: absolute;
+  margin: 0;
+}
+
+.toggleDay:has(input:checked) {
+  color: #ffb300;
+}
+
+.toggleNight:has(input:checked) {
+  color: #fdd835;
+}
