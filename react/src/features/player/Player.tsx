@@ -6,15 +6,11 @@ import {
   selectInitiativePlayerId,
   selectMonarchPlayerId,
 } from '../global/GlobalSlice';
-import {
-  incrementCommanderDamage,
-  PlayerId,
-  PlayerData,
-  toggleAscend,
-} from './PlayerSlice';
+import { PlayerData, toggleAscend } from './PlayerSlice';
 import { Spinner } from './Spinner';
 import styles from './Player.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { IconButton } from '../../components/IconButton';
 import { CommanderDamages } from './commanderDamages/CommanderDamages';
 
 type Props = {
@@ -59,21 +55,31 @@ export const Player: FC<Props> = ({ ...props }) => {
       </div>
       <ul className={styles.status}>
         <li>
-          <button type="button" onClick={clickChangeMonarch}>
-            {`monarch: ${monarchPlayerId === props.player.id ? 'yes' : 'no'}`}
-          </button>
+          <IconButton
+            type="button"
+            isActive={initiativePlayerId === props.player.id}
+            onClick={clickChangeInitiative}
+          >
+            explore
+          </IconButton>
         </li>
         <li>
-          <button type="button" onClick={clickChangeInitiative}>
-            {`initiative: ${
-              initiativePlayerId === props.player.id ? 'yes' : 'no'
-            }`}
-          </button>
+          <IconButton
+            type="button"
+            isActive={monarchPlayerId === props.player.id}
+            onClick={clickChangeMonarch}
+          >
+            castle
+          </IconButton>
         </li>
         <li>
-          <button type="button" onClick={clickToggleAscend}>
-            {`ascend: ${props.player.isAscend ? 'yes' : 'no'}`}
-          </button>
+          <IconButton
+            type="button"
+            isActive={props.player.isAscend}
+            onClick={clickToggleAscend}
+          >
+            10k
+          </IconButton>
         </li>
       </ul>
     </div>

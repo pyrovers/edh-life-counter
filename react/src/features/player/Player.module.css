@@ -120,12 +120,20 @@
 
 .life {
   font-weight: bold;
-  font-size: 5rem;
+  font-size: 10vw;
+  width: 2em;
+  text-align: center;
 }
 
 .status {
   display: flex;
   list-style: none;
-  justify-content: center;
+  justify-content: space-evenly;
   padding-inline-start: 0;
+  font-size: 3vw;
+  width: 60%;
+  margin: 0 auto;
+}
+.status li {
+  display: flex;
 }
