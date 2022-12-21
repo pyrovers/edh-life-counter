@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { Ripple } from '../../../components/Ripple';
 import { selectDayOrNight } from '../../global/GlobalSlice';
 import {
   CommanderDamageList,
@@ -41,15 +42,17 @@ export const CommanderDamages: FC<Props> = ({ ...props }) => {
         <li
           key={opponentId}
           className={styles[`${props.playerId}-${opponentId}`]}
-          onClick={() => {
-            clickCommanderDamage(props.playerId, opponentId);
-          }}
         >
-          <button
-            className={[styles.commanderDamage, styles[opponentId]].join(' ')}
-          >
-            {props.data.byId[opponentId]?.damage}
-          </button>
+          <Ripple>
+            <button
+              onClick={() => {
+                clickCommanderDamage(props.playerId, opponentId);
+              }}
+              className={[styles.commanderDamage, styles[opponentId]].join(' ')}
+            >
+              {props.data.byId[opponentId]?.damage}
+            </button>
+          </Ripple>
         </li>
       ))}
     </ul>

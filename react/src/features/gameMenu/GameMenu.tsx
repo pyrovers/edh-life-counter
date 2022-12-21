@@ -10,44 +10,48 @@ export const GameMenu = () => {
   const [isShowDialog, setIsShowDialog] = useState(false);
   const dispatch = useAppDispatch();
 
-  const closeDialog = () => {
+  const onClickShowDialog = () => {
+    setIsShowDialog(true);
+  };
+
+  const onClickCloseDialog = () => {
     setIsShowDialog(false);
   };
 
-  const restartGame = () => {
+  const onClickRestartGame = () => {
     dispatch(initializePlayers());
-    closeDialog();
+    onClickCloseDialog();
   };
 
-  const returnInitial = () => {
+  const onClickReturnInitial = () => {
     dispatch(unsetPlayers());
     dispatch(unsetGlobal());
-    closeDialog();
+    onClickCloseDialog();
   };
 
   return (
     <>
       <div className={styles.settingOpener}>
-        <IconButton icon="gear" onClick={() => setIsShowDialog(true)} />
+        <IconButton icon="gear" onClick={onClickShowDialog} />
       </div>
 
       {isShowDialog && (
-        <div className={styles.dialogBg} onClick={() => closeDialog()}>
+        <div className={styles.dialogBg} onClick={onClickCloseDialog}>
           <div className={styles.dialogContent}>
             <h2 className={styles.menuTitle}>Options</h2>
             <ul className={styles.menuList}>
               <li>
-                <button type="button" onClick={() => restartGame()}>
+                <button type="button" onClick={onClickRestartGame}>
                   リスタート
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => returnInitial()}>
+                <button type="button" onClick={onClickReturnInitial}>
                   初期設定へ戻る
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => closeDialog()}>
+                <button type="button" onClick={onClickCloseDialog}>
                   閉じる
                 </button>
               </li>

@@ -7,6 +7,13 @@ import styles from './DayAndNight.module.css';
 export const DayAndNight = () => {
   const dayOrNight = useAppSelector(selectDayOrNight);
 
+  const onClickDay = () => {
+    dispatch(changeDay());
+  };
+  const onCLickNight = () => {
+    dispatch(changeNight());
+  };
+
   const dispatch = useAppDispatch();
   return (
     <fieldset className={styles.fieldset}>
@@ -16,7 +23,7 @@ export const DayAndNight = () => {
           name="dayOrNight"
           value="day"
           checked={dayOrNight === 'day'}
-          onClick={() => dispatch(changeDay())}
+          onClick={onClickDay}
           readOnly={true}
         />
         <FontAwesomeIcon icon="sun" />
@@ -28,7 +35,7 @@ export const DayAndNight = () => {
           name="dayOrNight"
           value="night"
           checked={dayOrNight === 'night'}
-          onClick={() => dispatch(changeNight())}
+          onClick={onCLickNight}
           readOnly={true}
         />
         <FontAwesomeIcon icon="moon" />
