@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { changeDay, changeNight, selectDayOrNight } from '../GlobalSlice';
 
@@ -5,6 +6,13 @@ import styles from './DayAndNight.module.css';
 
 export const DayAndNight = () => {
   const dayOrNight = useAppSelector(selectDayOrNight);
+
+  const onClickDay = () => {
+    dispatch(changeDay());
+  };
+  const onCLickNight = () => {
+    dispatch(changeNight());
+  };
 
   const dispatch = useAppDispatch();
   return (
@@ -15,21 +23,22 @@ export const DayAndNight = () => {
           name="dayOrNight"
           value="day"
           checked={dayOrNight === 'day'}
-          onClick={() => dispatch(changeDay())}
+          onClick={onClickDay}
           readOnly={true}
         />
-        light_mode
+        <FontAwesomeIcon icon="sun" />
       </label>
+      <FontAwesomeIcon className={styles.arrow} icon="arrow-right-arrow-left" />
       <label className={styles.toggleNight}>
         <input
           type="radio"
           name="dayOrNight"
           value="night"
           checked={dayOrNight === 'night'}
-          onClick={() => dispatch(changeNight())}
+          onClick={onCLickNight}
           readOnly={true}
         />
-        dark_mode
+        <FontAwesomeIcon icon="moon" />
       </label>
     </fieldset>
   );

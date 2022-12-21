@@ -1,14 +1,22 @@
 .IconButton {
   color: var(--inactive-color);
   background-color: transparent;
-  font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: inherit;
   line-height: 1;
-  padding: 0;
+  padding: 0.2em;
   border: none;
+  border-radius: 1em;
+  box-sizing: content-box;
+  min-height: 1em;
+  min-width: 1em;
+  position: relative;
+  overflow: hidden;
 }
 .Active {
   color: inherit;
+}
+
+.icon {
 }

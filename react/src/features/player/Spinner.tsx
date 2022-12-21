@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { IconButton } from '../../components/IconButton';
+import { Ripple } from '../../components/Ripple';
 import { incrementLife, PlayerId } from './PlayerSlice';
 import styles from './Spinner.module.css';
 
@@ -11,7 +12,7 @@ type Props = {
 export const Spinner: FC<Props> = ({ ...props }) => {
   const dispatch = useAppDispatch();
 
-  const clickIncrement = () =>
+  const onClickIncrement = () =>
     dispatch(
       incrementLife({
         amount: props.step,
@@ -19,7 +20,7 @@ export const Spinner: FC<Props> = ({ ...props }) => {
       })
     );
 
-  const clickDecrement = () =>
+  const onClickDecrement = () =>
     dispatch(
       incrementLife({
         amount: -props.step,
@@ -30,15 +31,21 @@ export const Spinner: FC<Props> = ({ ...props }) => {
   return (
     <>
       <div className={styles.container}>
-        <IconButton type="button" onClick={clickIncrement}>
-          keyboard_arrow_up
-        </IconButton>
-
+        <Ripple>
+          <IconButton
+            icon="caret-up"
+            type="button"
+            onClick={onClickIncrement}
+          />
+        </Ripple>
         <span className={styles.step}>{props.step}</span>
-
-        <IconButton type="button" onClick={clickDecrement}>
-          keyboard_arrow_down
-        </IconButton>
+        <Ripple>
+          <IconButton
+            icon="caret-down"
+            type="button"
+            onClick={onClickDecrement}
+          />
+        </Ripple>
       </div>
     </>
   );

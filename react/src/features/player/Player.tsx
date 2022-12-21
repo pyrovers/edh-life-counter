@@ -12,6 +12,7 @@ import styles from './Player.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { IconButton } from '../../components/IconButton';
 import { CommanderDamages } from './commanderDamages/CommanderDamages';
+import { Ripple } from '../../components/Ripple';
 
 type Props = {
   player: PlayerData;
@@ -23,15 +24,15 @@ export const Player: FC<Props> = ({ ...props }) => {
   const dayOrNight = useAppSelector(selectDayOrNight);
   const dispatch = useAppDispatch();
 
-  const clickChangeMonarch = () => {
+  const onClickChangeMonarch = () => {
     dispatch(changeMonarchPlayer(props.player.id));
   };
 
-  const clickChangeInitiative = () => {
+  const onClickChangeInitiative = () => {
     dispatch(changeInitiativePlayer(props.player.id));
   };
 
-  const clickToggleAscend = () => {
+  const onClickToggleAscend = () => {
     dispatch(toggleAscend(props.player.id));
   };
 
@@ -55,31 +56,34 @@ export const Player: FC<Props> = ({ ...props }) => {
       </div>
       <ul className={styles.status}>
         <li>
-          <IconButton
-            type="button"
-            isActive={initiativePlayerId === props.player.id}
-            onClick={clickChangeInitiative}
-          >
-            explore
-          </IconButton>
+          <Ripple>
+            <IconButton
+              icon="scroll"
+              type="button"
+              isActive={initiativePlayerId === props.player.id}
+              onClick={onClickChangeInitiative}
+            />
+          </Ripple>
         </li>
         <li>
-          <IconButton
-            type="button"
-            isActive={monarchPlayerId === props.player.id}
-            onClick={clickChangeMonarch}
-          >
-            castle
-          </IconButton>
+          <Ripple>
+            <IconButton
+              icon="crown"
+              type="button"
+              isActive={monarchPlayerId === props.player.id}
+              onClick={onClickChangeMonarch}
+            />
+          </Ripple>
         </li>
         <li>
-          <IconButton
-            type="button"
-            isActive={props.player.isAscend}
-            onClick={clickToggleAscend}
-          >
-            10k
-          </IconButton>
+          <Ripple>
+            <IconButton
+              icon="people-line"
+              type="button"
+              isActive={props.player.isAscend}
+              onClick={onClickToggleAscend}
+            />
+          </Ripple>
         </li>
       </ul>
     </div>

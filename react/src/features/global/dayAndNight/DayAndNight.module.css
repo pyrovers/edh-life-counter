@@ -1,8 +1,7 @@
 .fieldset {
   color: var(--inactive-color);
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
+  display: flex;
+  align-items: center;
   font-size: 3vw;
   line-height: 1;
   padding: 0.5vw 1vw;
@@ -15,9 +14,9 @@
   position: relative;
 }
 
-.toggleDay::after {
-  content: 'multiple_stop';
-  color: #999;
+.arrow {
+  font-size: 2vw;
+  margin: 0 0.5em;
 }
 
 .toggleDay > input,
