@@ -11,7 +11,7 @@ export const Ripple: FC<Props> = ({ children }) => {
     setRipple(true);
     setTimeout(() => {
       setRipple(false);
-    }, 300);
+    }, 500);
   };
 
   const rippleProps = {
