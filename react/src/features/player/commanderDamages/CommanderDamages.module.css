@@ -4,52 +4,12 @@
   display: inline-grid;
   width: 60%;
   margin: 0 auto;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .commanderDamages li {
   grid-row: 1;
   text-align: center;
 }
-.player1 {
-  color: var(--player1-light-color);
-  border-color: var(--player1-dark-color);
-  background-color: var(--player1-dark-color);
-}
-.night .player1 {
-  color: var(--player1-dark-color);
-  border-color: var(--player1-light-color);
-  background-color: var(--player1-light-color);
-}
-.player2 {
-  color: var(--player2-light-color);
-  border-color: var(--player2-dark-color);
-  background-color: var(--player2-dark-color);
-}
-.night .player2 {
-  color: var(--player2-dark-color);
-  border-color: var(--player2-light-color);
-  background-color: var(--player2-light-color);
-}
-.player3 {
-  color: var(--player3-light-color);
-  border-color: var(--player3-dark-color);
-  background-color: var(--player3-dark-color);
-}
-.night .player3 {
-  color: var(--player3-dark-color);
-  border-color: var(--player3-light-color);
-  background-color: var(--player3-light-color);
-}
-.player4 {
-  color: var(--player4-light-color);
-  border-color: var(--player4-dark-color);
-  background-color: var(--player4-dark-color);
-}
-.night .player4 {
-  color: var(--player4-dark-color);
-  border-color: var(--player4-light-color);
-  background-color: var(--player4-light-color);
-}
-
 .player1-player2 {
   grid-column: 2;
 }
@@ -88,13 +48,4 @@
 }
 .player4-player3 {
   grid-column: 2;
-}
-
-.commanderDamage {
-  font-weight: bold;
-  padding: 0.2em;
-  border: none;
-  font-size: 2vw;
-  min-width: 2em;
-  border-radius: 1em;
 }
