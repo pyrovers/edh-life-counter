@@ -1,4 +1,9 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, {
+  FC,
+  MouseEventHandler,
+  PropsWithChildren,
+  TouchEventHandler,
+} from 'react';
 import styles from './IconButton.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +18,12 @@ interface Props {
   type?: 'button' | 'submit' | 'reset' | undefined;
   className?: string | undefined;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-}
+  onMouseDown?: MouseEventHandler<HTMLButtonElement>;
+  onMouseUp?: MouseEventHandler<HTMLButtonElement>;
+  onMouseLeave?: MouseEventHandler<HTMLButtonElement>;
+  onTouchStart?: TouchEventHandler<HTMLButtonElement>;
+  onTouchEnd?: TouchEventHandler<HTMLButtonElement>;
+};
 export const IconButton: FC<Props> = ({ ...props }) => {
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (props.onClick) props.onClick(e);
@@ -28,6 +38,11 @@ export const IconButton: FC<Props> = ({ ...props }) => {
         props.isActive ? [styles.Active] : '',
       ].join(' ')}
       onClick={onClick}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      onMouseLeave={props.onMouseLeave}
+      onTouchStart={props.onTouchStart}
+      onTouchEnd={props.onTouchEnd}
     >
       <FontAwesomeIcon
         className={styles.icon}
