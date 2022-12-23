@@ -9,6 +9,11 @@
   inherits: false;
   initial-value: 100%;
 }
+@property --ripple-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #fff0;
+}
 
 /* ripple */
 .ripple {
@@ -26,21 +31,25 @@
 }
 .ripple.effect::before {
   animation-name: ripple;
-  animation-duration: 300ms;
-  background-image: radial-gradient(transparent 0, transparent var(--ripple-inner-size), #fff9  var(--ripple-end-size), transparent 100%);
+  animation-duration: 500ms;
+  background-image: radial-gradient(transparent 0, var(--ripple-color) var(--ripple-inner-size), transparent  var(--ripple-end-size), transparent 100%);
 }
 
 @keyframes ripple {
   0% {
-    --ripple-inner-size: 0%;
-    --ripple-end-size: 10%;
+    --ripple-inner-size: 10%;
+    --ripple-end-size: 0%;
+    --ripple-color: #fff9;
   }
-  100% {
+  10% {
+    --ripple-end-size: 50%;
+  }
+  50% {
     --ripple-inner-size: 50%;
-    --ripple-end-size: 80%;
   }
   100% {
-    --ripple-inner-size: 80%;
-    --ripple-end-size: 80%;
+    --ripple-inner-size: 90%;
+    --ripple-end-size: 140%;
+    --ripple-color: #fff0;
   }
 }

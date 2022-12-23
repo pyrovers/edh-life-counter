@@ -1,58 +1,24 @@
 import { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { Ripple } from '../../../components/Ripple';
-import { selectDayOrNight } from '../../global/GlobalSlice';
-import {
-  CommanderDamageList,
-  incrementCommanderDamage,
-  PlayerId,
-} from '../PlayerSlice';
+import { CommanderDamageList, PlayerId } from '../PlayerSlice';
+import { CommanderDamage } from './CommanderDamage';
 
 import styles from './CommanderDamages.module.css';
 
-type Props = {
+interface Props {
   playerId: PlayerId;
   data: CommanderDamageList;
-};
+}
 export const CommanderDamages: FC<Props> = ({ ...props }) => {
-  const dispatch = useAppDispatch();
-  const dayOrNight = useAppSelector(selectDayOrNight);
-
-  const clickCommanderDamage = (
-    targetPlayerId: PlayerId,
-    opponentId: PlayerId
-  ) => {
-    dispatch(
-      incrementCommanderDamage({
-        amount: 1,
-        opponentId,
-        targetPlayerId,
-      })
-    );
-  };
-
   return (
-    <ul
-      className={[
-        styles.commanderDamages,
-        dayOrNight === 'night' ? styles.night : '',
-      ].join(' ')}
-    >
+    <ul className={[styles.commanderDamages].join(' ')}>
       {props.data.allIds.map((opponentId) => (
         <li
           key={opponentId}
           className={styles[`${props.playerId}-${opponentId}`]}
         >
-          <Ripple>
-            <button
-              onClick={() => {
-                clickCommanderDamage(props.playerId, opponentId);
-              }}
-              className={[styles.commanderDamage, styles[opponentId]].join(' ')}
-            >
-              {props.data.byId[opponentId]?.damage}
-            </button>
-          </Ripple>
+          <CommanderDamage playerId={props.playerId} opponentId={opponentId}>
+            {props.data.byId[opponentId]?.damage}
+          </CommanderDamage>
         </li>
       ))}
     </ul>

@@ -11,14 +11,20 @@ export const Ripple: FC<Props> = ({ children }) => {
     setRipple(true);
     setTimeout(() => {
       setRipple(false);
-    }, 300);
+    }, 500);
   };
 
   const rippleProps = {
-    onClick: () => {
+    onMouseDown: () => {
       spreadRipple();
-      if (children.props.onClick) {
-        children.props.onClick();
+      if (children.props.onMouseDown) {
+        children.props.onMouseDown();
+      }
+    },
+    onTouchStart: () => {
+      spreadRipple();
+      if (children.props.onTouchStart) {
+        children.props.onTouchStart();
       }
     },
     className: `${children.props.className ?? ''} ${[
