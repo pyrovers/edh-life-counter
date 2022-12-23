@@ -35,7 +35,7 @@ export const CommanderACastCounter: FC<Props> = ({ ...props }) => {
   return (
     <Ripple>
       <IconButton
-        icon="shield"
+        icon="shield-halved"
         type="button"
         isActive={!!commanderACastCount}
         {...handleCommanderALongPress}

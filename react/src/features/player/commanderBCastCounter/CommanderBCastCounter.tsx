@@ -35,7 +35,7 @@ export const CommanderBCastCounter: FC<Props> = ({ ...props }) => {
   return (
     <Ripple>
       <IconButton
-        icon="shield-halved"
+        icon="shield"
         type="button"
         isActive={!!commanderBCastCount}
         {...handleCommanderBLongPress}
