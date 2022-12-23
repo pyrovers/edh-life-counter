@@ -22,6 +22,11 @@ export interface PlayersState {
 export interface PlayerData {
   id: PlayerId;
   life: number;
+  poisonCount: number;
+  manaCount: number;
+  energyCount: number;
+  commanderACastCount: number;
+  commanderBCastCount: number;
   isAscend: boolean;
   commanderDamages: CommanderDamageList;
 }
@@ -74,6 +79,11 @@ const generatePlayers = (playerCount: number, initialLife: number) => {
       isAscend: false,
       life: initialLife,
       commanderDamages,
+      poisonCount: 0,
+      manaCount: 0,
+      energyCount: 0,
+      commanderACastCount: 0,
+      commanderBCastCount: 0,
     };
   });
 
@@ -106,6 +116,76 @@ export const playerSlice = createSlice({
         return;
       }
       targetPlayer.life += action.payload.amount;
+    },
+    incrementPoisonCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.poisonCount += 1;
+    },
+    resetPoisonCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.poisonCount = 0;
+    },
+    incrementEnergyCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.energyCount += 1;
+    },
+    resetManaCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.manaCount = 0;
+    },
+    incrementManaCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.manaCount += 1;
+    },
+    resetEnergyCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.energyCount = 0;
+    },
+    incrementCommanderACastCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.commanderACastCount += 1;
+    },
+    resetCommanderACastCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.commanderACastCount = 0;
+    },
+    incrementCommanderBCastCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.commanderBCastCount += 1;
+    },
+    resetCommanderBCastCount: (player, action: PayloadAction<PlayerId>) => {
+      const targetPlayer = player.byId[action.payload];
+      if (!targetPlayer) {
+        return;
+      }
+      targetPlayer.commanderBCastCount = 0;
     },
     toggleAscend: (player, action: PayloadAction<PlayerId>) => {
       const targetPlayer = player.byId[action.payload];
@@ -163,6 +243,16 @@ export const playerSlice = createSlice({
 
 export const {
   incrementLife,
+  incrementPoisonCount,
+  resetPoisonCount,
+  incrementEnergyCount,
+  resetEnergyCount,
+  incrementManaCount,
+  resetManaCount,
+  incrementCommanderACastCount,
+  resetCommanderACastCount,
+  incrementCommanderBCastCount,
+  resetCommanderBCastCount,
   incrementCommanderDamage,
   resetCommanderDamage,
   toggleAscend,
