@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { IconButton } from '../../components/IconButton';
-import { unsetGlobal } from '../global/GlobalSlice';
+import { initializeGlobal, unsetGlobal } from '../global/GlobalSlice';
 import { initializePlayers, unsetPlayers } from '../player/PlayerSlice';
 
 import styles from './GameMenu.module.css';
@@ -20,6 +20,7 @@ export const GameMenu = () => {
 
   const onClickRestartGame = () => {
     dispatch(initializePlayers());
+    dispatch(initializeGlobal());
     onClickCloseDialog();
   };
 
