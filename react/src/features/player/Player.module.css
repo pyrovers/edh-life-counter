@@ -115,13 +115,13 @@
 .lifeCounter {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: stretch;
 }
 
 .life {
   font-weight: bold;
-  font-size: 10vw;
+  font-size: 11vw;
   width: 2em;
   text-align: center;
 }
@@ -131,8 +131,7 @@
   list-style: none;
   justify-content: center;
   padding-inline-start: 0;
-  font-size: 3vw;
-  width: 60%;
+  font-size: 3.4vw;
   margin: 0 auto 0.2em;
 }
 .status li {
