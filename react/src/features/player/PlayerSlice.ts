@@ -267,6 +267,28 @@ export const selectLife = (rootState: RootState, playerId: PlayerId) => {
   return rootState.game.players.byId[playerId]?.life;
 };
 
+export const selectPoisonCount = (rootState: RootState, playerId: PlayerId) => {
+  return rootState.game.players.byId[playerId]?.poisonCount;
+};
+export const selectEnergyCount = (rootState: RootState, playerId: PlayerId) => {
+  return rootState.game.players.byId[playerId]?.energyCount;
+};
+export const selectManaCount = (rootState: RootState, playerId: PlayerId) => {
+  return rootState.game.players.byId[playerId]?.manaCount;
+};
+export const selectCommanderACastCount = (
+  rootState: RootState,
+  playerId: PlayerId
+) => {
+  return rootState.game.players.byId[playerId]?.commanderACastCount;
+};
+export const selectCommanderBCastCount = (
+  rootState: RootState,
+  playerId: PlayerId
+) => {
+  return rootState.game.players.byId[playerId]?.commanderBCastCount;
+};
+
 export const selectCommanderDamage = (
   rootState: RootState,
   playerId: PlayerId,

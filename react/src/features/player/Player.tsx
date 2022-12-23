@@ -6,27 +6,18 @@ import {
   selectInitiativePlayerId,
   selectMonarchPlayerId,
 } from '../global/GlobalSlice';
-import {
-  incrementCommanderACastCount,
-  incrementCommanderBCastCount,
-  incrementEnergyCount,
-  incrementManaCount,
-  incrementPoisonCount,
-  PlayerData,
-  resetCommanderACastCount,
-  resetCommanderBCastCount,
-  resetEnergyCount,
-  resetManaCount,
-  resetPoisonCount,
-  toggleAscend,
-} from './PlayerSlice';
+import { PlayerData, toggleAscend } from './PlayerSlice';
 import { Spinner } from './Spinner';
 import styles from './Player.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { IconButton } from '../../components/IconButton';
 import { CommanderDamages } from './commanderDamages/CommanderDamages';
 import { Ripple } from '../../components/Ripple';
-import { useLongPress } from '../../hooks/useLongPress';
+import { PoisonCounter } from './poisonCounter/PoisonCounter';
+import { EnergyCounter } from './energyCounter/EnergyCounter';
+import { ManaCounter } from './manaCounter/ManaCounter';
+import { CommanderACastCounter } from './commanderACastCounter/CommanderACastCounter';
+import { CommanderBCastCounter } from './commanderBCastCounter/CommanderBCastCounter';
 
 type Props = {
   player: PlayerData;
@@ -49,62 +40,6 @@ export const Player: FC<Props> = ({ ...props }) => {
   const onClickToggleAscend = () => {
     dispatch(toggleAscend(props.player.id));
   };
-
-  const onClickPoison = () => {
-    dispatch(incrementPoisonCount(props.player.id));
-  };
-  const onLongPressPoison = () => {
-    dispatch(resetPoisonCount(props.player.id));
-  };
-  const handlePoisonLongPress = useLongPress(
-    onLongPressPoison,
-    1000,
-    onClickPoison
-  );
-
-  const onClickMana = () => {
-    dispatch(incrementManaCount(props.player.id));
-  };
-  const onLongPressMana = () => {
-    dispatch(resetManaCount(props.player.id));
-  };
-  const handleManaLongPress = useLongPress(onLongPressMana, 1000, onClickMana);
-
-  const onClickEnergy = () => {
-    dispatch(incrementEnergyCount(props.player.id));
-  };
-  const onLongPressEnergy = () => {
-    dispatch(resetEnergyCount(props.player.id));
-  };
-  const handleEnergyLongPress = useLongPress(
-    onLongPressEnergy,
-    1000,
-    onClickEnergy
-  );
-
-  const onClickCommanderA = () => {
-    dispatch(incrementCommanderACastCount(props.player.id));
-  };
-  const onLongPressCommanderA = () => {
-    dispatch(resetCommanderACastCount(props.player.id));
-  };
-  const handleCommanderALongPress = useLongPress(
-    onLongPressCommanderA,
-    1000,
-    onClickCommanderA
-  );
-
-  const onClickCommanderB = () => {
-    dispatch(incrementCommanderBCastCount(props.player.id));
-  };
-  const onLongPressCommanderB = () => {
-    dispatch(resetCommanderBCastCount(props.player.id));
-  };
-  const handleCommanderBLongPress = useLongPress(
-    onLongPressCommanderB,
-    1000,
-    onClickCommanderB
-  );
 
   return (
     <div
@@ -160,64 +95,19 @@ export const Player: FC<Props> = ({ ...props }) => {
       </ul>
       <ul className={styles.status}>
         <li>
-          <Ripple>
-            <IconButton
-              icon="skull"
-              type="button"
-              isActive={!!props.player.poisonCount}
-              {...handlePoisonLongPress}
-            >
-              <>{props.player.poisonCount}</>
-            </IconButton>
-          </Ripple>
+          <PoisonCounter playerId={props.player.id} />
         </li>
         <li>
-          <Ripple>
-            <IconButton
-              icon="bolt"
-              type="button"
-              isActive={!!props.player.energyCount}
-              {...handleEnergyLongPress}
-            >
-              <>{props.player.energyCount}</>
-            </IconButton>
-          </Ripple>
+          <EnergyCounter playerId={props.player.id} />
         </li>
         <li>
-          <Ripple>
-            <IconButton
-              icon="hand-holding-droplet"
-              type="button"
-              isActive={!!props.player.manaCount}
-              {...handleManaLongPress}
-            >
-              <>{props.player.manaCount}</>
-            </IconButton>
-          </Ripple>
+          <ManaCounter playerId={props.player.id} />
         </li>
         <li>
-          <Ripple>
-            <IconButton
-              icon="shield"
-              type="button"
-              isActive={!!props.player.commanderACastCount}
-              {...handleCommanderALongPress}
-            >
-              <>{props.player.commanderACastCount}</>
-            </IconButton>
-          </Ripple>
+          <CommanderACastCounter playerId={props.player.id} />
         </li>
         <li>
-          <Ripple>
-            <IconButton
-              icon="shield-halved"
-              type="button"
-              isActive={!!props.player.commanderBCastCount}
-              {...handleCommanderBLongPress}
-            >
-              <>{props.player.commanderBCastCount}</>
-            </IconButton>
-          </Ripple>
+          <CommanderBCastCounter playerId={props.player.id} />
         </li>
       </ul>
     </div>
