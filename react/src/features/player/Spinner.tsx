@@ -35,6 +35,7 @@ export const Spinner: FC<Props> = ({ ...props }) => {
           <IconButton
             icon="caret-up"
             type="button"
+            isActive={true}
             onClick={onClickIncrement}
           />
         </Ripple>
@@ -43,6 +44,7 @@ export const Spinner: FC<Props> = ({ ...props }) => {
           <IconButton
             icon="caret-down"
             type="button"
+            isActive={true}
             onClick={onClickDecrement}
           />
         </Ripple>

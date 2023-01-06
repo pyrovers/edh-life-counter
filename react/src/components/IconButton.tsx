@@ -12,7 +12,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fas);
 
-interface Props {
+type Props = PropsWithChildren & {
   icon: IconName;
   isActive?: boolean;
   type?: 'button' | 'submit' | 'reset' | undefined;
@@ -36,6 +36,7 @@ export const IconButton: FC<Props> = ({ ...props }) => {
         props.className,
         styles.IconButton,
         props.isActive ? [styles.Active] : '',
+        props.children ? [styles.WithChildren] : '',
       ].join(' ')}
       onClick={onClick}
       onMouseDown={props.onMouseDown}
@@ -44,10 +45,10 @@ export const IconButton: FC<Props> = ({ ...props }) => {
       onTouchStart={props.onTouchStart}
       onTouchEnd={props.onTouchEnd}
     >
-      <FontAwesomeIcon
-        className={styles.icon}
-        icon={props.icon}
-      ></FontAwesomeIcon>
+      <FontAwesomeIcon className={styles.icon} icon={props.icon} />
+      {props.children && (
+        <span className={styles.children}>{props.children}</span>
+      )}
     </button>
   );
 };

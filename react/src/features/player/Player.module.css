@@ -1,43 +1,43 @@
 .player1 {
-  color: var(--player1-dark-color);
-  border-color: var(--player1-dark-color);
+  color: var(--player1-color);
+  border-color: var(--player1-color);
   background-color: var(--player1-light-color);
 }
 .night.player1 {
-  color: var(--player1-light-color);
+  color: #fff;
   border-color: var(--player1-dark-color);
   background-color: var(--player1-dark-color);
 }
 
 .player2 {
-  color: var(--player2-dark-color);
-  border-color: var(--player2-dark-color);
+  color: var(--player2-color);
+  border-color: var(--player2-color);
   background-color: var(--player2-light-color);
 }
 .night.player2 {
-  color: var(--player2-light-color);
+  color: #fff;
   border-color: var(--player2-dark-color);
   background-color: var(--player2-dark-color);
 }
 
 .player3 {
-  color: var(--player3-dark-color);
-  border-color: var(--player3-dark-color);
+  color: var(--player3-color);
+  border-color: var(--player3-color);
   background-color: var(--player3-light-color);
 }
 .night.player3 {
-  color: var(--player3-light-color);
+  color: #fff;
   border-color: var(--player3-dark-color);
   background-color: var(--player3-dark-color);
 }
 
 .player4 {
-  color: var(--player4-dark-color);
-  border-color: var(--player4-dark-color);
+  color: var(--player4-color);
+  border-color: var(--player4-color);
   background-color: var(--player4-light-color);
 }
 .night.player4 {
-  color: var(--player4-light-color);
+  color: #fff;
   border-color: var(--player4-dark-color);
   background-color: var(--player4-dark-color);
 }
@@ -109,19 +109,19 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .lifeCounter {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: stretch;
 }
 
 .life {
   font-weight: bold;
-  font-size: 10vw;
+  font-size: 11vw;
   width: 2em;
   text-align: center;
 }
@@ -129,12 +129,14 @@
 .status {
   display: flex;
   list-style: none;
-  justify-content: space-evenly;
+  justify-content: center;
   padding-inline-start: 0;
-  font-size: 3vw;
-  width: 60%;
-  margin: 0 auto;
+  font-size: 3.4vw;
+  margin: 0 auto 0.2em;
 }
 .status li {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 2em;
 }

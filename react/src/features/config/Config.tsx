@@ -32,7 +32,7 @@ export function Config() {
 
   const submit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    dispatch(initializeGlobal({}));
+    dispatch(initializeGlobal());
     dispatch(initializePlayers());
   };
 

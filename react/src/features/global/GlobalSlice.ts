@@ -18,7 +18,7 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-    initializeGlobal: (global, action) => {
+    initializeGlobal: (global) => {
       return { ...global, ...initialState };
     },
     changeMonarchPlayer: (global, action: PayloadAction<PlayerId>) => {

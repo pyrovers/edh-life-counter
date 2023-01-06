@@ -13,6 +13,11 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { IconButton } from '../../components/IconButton';
 import { CommanderDamages } from './commanderDamages/CommanderDamages';
 import { Ripple } from '../../components/Ripple';
+import { PoisonCounter } from './poisonCounter/PoisonCounter';
+import { EnergyCounter } from './energyCounter/EnergyCounter';
+import { ManaCounter } from './manaCounter/ManaCounter';
+import { CommanderACastCounter } from './commanderACastCounter/CommanderACastCounter';
+import { CommanderBCastCounter } from './commanderBCastCounter/CommanderBCastCounter';
 
 type Props = {
   player: PlayerData;
@@ -78,12 +83,31 @@ export const Player: FC<Props> = ({ ...props }) => {
         <li>
           <Ripple>
             <IconButton
-              icon="people-line"
+              icon="medal"
               type="button"
               isActive={props.player.isAscend}
               onClick={onClickToggleAscend}
-            />
+            >
+              10+
+            </IconButton>
           </Ripple>
+        </li>
+      </ul>
+      <ul className={styles.status}>
+        <li>
+          <PoisonCounter playerId={props.player.id} />
+        </li>
+        <li>
+          <EnergyCounter playerId={props.player.id} />
+        </li>
+        <li>
+          <ManaCounter playerId={props.player.id} />
+        </li>
+        <li>
+          <CommanderACastCounter playerId={props.player.id} />
+        </li>
+        <li>
+          <CommanderBCastCounter playerId={props.player.id} />
         </li>
       </ul>
     </div>
