@@ -1,43 +1,43 @@
 .player1 {
-  color: var(--player1-dark-color);
-  border-color: var(--player1-dark-color);
+  color: var(--player1-color);
+  border-color: var(--player1-color);
   background-color: var(--player1-light-color);
 }
 .night.player1 {
-  color: var(--player1-light-color);
+  color: #fff;
   border-color: var(--player1-dark-color);
   background-color: var(--player1-dark-color);
 }
 
 .player2 {
-  color: var(--player2-dark-color);
-  border-color: var(--player2-dark-color);
+  color: var(--player2-color);
+  border-color: var(--player2-color);
   background-color: var(--player2-light-color);
 }
 .night.player2 {
-  color: var(--player2-light-color);
+  color: #fff;
   border-color: var(--player2-dark-color);
   background-color: var(--player2-dark-color);
 }
 
 .player3 {
-  color: var(--player3-dark-color);
-  border-color: var(--player3-dark-color);
+  color: var(--player3-color);
+  border-color: var(--player3-color);
   background-color: var(--player3-light-color);
 }
 .night.player3 {
-  color: var(--player3-light-color);
+  color: #fff;
   border-color: var(--player3-dark-color);
   background-color: var(--player3-dark-color);
 }
 
 .player4 {
-  color: var(--player4-dark-color);
-  border-color: var(--player4-dark-color);
+  color: var(--player4-color);
+  border-color: var(--player4-color);
   background-color: var(--player4-light-color);
 }
 .night.player4 {
-  color: var(--player4-light-color);
+  color: #fff;
   border-color: var(--player4-dark-color);
   background-color: var(--player4-dark-color);
 }
