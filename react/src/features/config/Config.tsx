@@ -1,25 +1,20 @@
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useContext } from 'react';
+
 import { initializeGlobal } from '../global/GlobalSlice';
 import { initializePlayers } from '../player/PlayerSlice';
-import {
-  selectInitialLife,
-  selectPlayerCount,
-  setInitialLife,
-  setPlayerCount,
-} from './ConfigSlice';
 import styles from './Config.module.css';
+import { ConfigContext, ConfigDispatchContext } from './ConfigProvider';
 
 export function Config() {
-  const dispatch = useAppDispatch();
-  const playerCount = useAppSelector(selectPlayerCount);
-  const initialLife = useAppSelector(selectInitialLife);
+  const dispatch = useContext(ConfigDispatchContext);
+  const { playerCount, initialLife } = useContext(ConfigContext);
 
   const changePlayerCount = (playerCountText: string) => {
     const playerCount = Number(playerCountText);
     if (playerCount <= 0) {
       return;
     }
-    dispatch(setPlayerCount(playerCount));
+    dispatch({ type: 'SetPlayerCount', playerCount });
   };
 
   const changeInitialLife = (lifeText: string) => {
@@ -27,13 +22,14 @@ export function Config() {
     if (life <= 0) {
       return;
     }
-    dispatch(setInitialLife(life));
+    dispatch({ type: 'SetInitialLife', life });
   };
 
   const submit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    dispatch(initializeGlobal());
-    dispatch(initializePlayers());
+    // TODO: 初期値セット
+    // dispatch(initializeGlobal());
+    // dispatch(initializePlayers());
   };
 
   return (
