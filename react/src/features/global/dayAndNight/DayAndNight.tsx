@@ -1,20 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { changeDay, changeNight, selectDayOrNight } from '../GlobalSlice';
 
 import styles from './DayAndNight.module.css';
+import { useContext } from 'react';
+import { GlobalContext, GlobalDispatchContext } from '../GlobalProvider';
 
 export const DayAndNight = () => {
-  const dayOrNight = useAppSelector(selectDayOrNight);
+  const { dayOrNight } = useContext(GlobalContext);
+  const dispatch = useContext(GlobalDispatchContext);
 
   const onClickDay = () => {
-    dispatch(changeDay());
+    dispatch({ type: 'ChangeDay' });
   };
   const onCLickNight = () => {
-    dispatch(changeNight());
+    dispatch({ type: 'ChangeNight' });
   };
 
-  const dispatch = useAppDispatch();
   return (
     <fieldset className={styles.fieldset}>
       <label className={styles.toggleDay}>

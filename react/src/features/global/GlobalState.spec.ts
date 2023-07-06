@@ -1,11 +1,4 @@
-import gameReducer, {
-  GlobalState,
-  changeDay,
-  changeInitiativePlayer,
-  changeMonarchPlayer,
-  changeNight,
-  toggleDayOrNight,
-} from './GlobalSlice';
+import { GlobalState, globalReducer } from './GlobalState';
 
 describe('game reducer', () => {
   const initialState: GlobalState = {
@@ -15,7 +8,7 @@ describe('game reducer', () => {
   };
 
   it('初期ステートの設定', () => {
-    expect(gameReducer(undefined, { type: 'unknown' })).toEqual({
+    expect(globalReducer(initialState, { type: 'InitializeGlobal' })).toEqual({
       monarchPlayerId: null,
       initiativePlayerId: null,
       dayOrNight: null,
@@ -23,29 +16,39 @@ describe('game reducer', () => {
   });
 
   it('昼夜の変更', () => {
-    const actual1 = gameReducer(initialState, toggleDayOrNight());
+    const actual1 = globalReducer(initialState, {
+      type: 'ToggleDayOrNight',
+    });
     expect(actual1.dayOrNight).toBe('night');
-    const actual2 = gameReducer(actual1, toggleDayOrNight());
+    const actual2 = globalReducer(actual1, {
+      type: 'ToggleDayOrNight',
+    });
     expect(actual2.dayOrNight).toBe('day');
   });
 
   it('昼にする', () => {
-    const actual1 = gameReducer(initialState, changeDay());
+    const actual1 = globalReducer(initialState, { type: 'ChangeDay' });
     expect(actual1.dayOrNight).toBe('day');
   });
 
   it('夜にする', () => {
-    const actual1 = gameReducer(initialState, changeNight());
+    const actual1 = globalReducer(initialState, { type: 'ChangeNight' });
     expect(actual1.dayOrNight).toBe('night');
   });
 
   it('統治者の切り替え', () => {
-    const actual = gameReducer(initialState, changeMonarchPlayer('player3'));
+    const actual = globalReducer(initialState, {
+      type: 'ChangeMonarchPlayer',
+      monarchPlayerId: 'player3',
+    });
     expect(actual.monarchPlayerId).toBe('player3');
   });
 
   it('イニシアチブプレイヤーの切り替え', () => {
-    const actual = gameReducer(initialState, changeInitiativePlayer('player1'));
+    const actual = globalReducer(initialState, {
+      type: 'ChangeInitiativePlayer',
+      initiativePlayerId: 'player1',
+    });
     expect(actual.initiativePlayerId).toBe('player1');
   });
 });

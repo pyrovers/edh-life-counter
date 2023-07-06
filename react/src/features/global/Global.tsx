@@ -1,12 +1,12 @@
-import { useAppSelector } from '../../app/hooks';
+import { useContext } from 'react';
 import { GameMenu } from '../gameMenu/GameMenu';
 import { DayAndNight } from './dayAndNight/DayAndNight';
 
 import styles from './Global.module.css';
-import { selectDayOrNight } from './GlobalSlice';
+import { GlobalContext } from './GlobalProvider';
 
 export const Global = () => {
-  const dayOrNight = useAppSelector(selectDayOrNight);
+  const { dayOrNight } = useContext(GlobalContext);
 
   return (
     <ul
