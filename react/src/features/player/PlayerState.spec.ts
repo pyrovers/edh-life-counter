@@ -1,11 +1,4 @@
-import playerReducer, {
-  PlayersState,
-  incrementCommanderDamage,
-  incrementLife,
-  resetCommanderDamage,
-  toggleAscend,
-  initializePlayers,
-} from './PlayerSlice';
+import { PlayersState, playersReducer } from './PlayersState';
 
 describe('player reducer', () => {
   const initialState: PlayersState = {
@@ -84,16 +77,16 @@ describe('player reducer', () => {
   };
 
   it('初期ステートの設定', () => {
-    expect(playerReducer(undefined, { type: 'unknown' })).toEqual({
+    expect(playersReducer(initialState, { type: 'UnsetPlayers' })).toEqual({
       byId: {},
       allIds: [],
     } as PlayersState);
   });
 
   it('プレイヤー情報の初期化 - 2人', () => {
-    const actual = playerReducer(initialState, {
-      type: initializePlayers.fulfilled.type,
-      payload: { initialLife: 40, playerCount: 2 },
+    const actual = playersReducer(initialState, {
+      type: 'InitializePlayers',
+      initialInfo: { initialLife: 40, playerCount: 2 },
     });
     expect(actual.allIds.length).toBe(2);
     expect(actual.allIds.includes('player1')).toBeTruthy();
@@ -120,9 +113,9 @@ describe('player reducer', () => {
   });
 
   it('プレイヤー情報の初期化 - 3人', () => {
-    const actual = playerReducer(initialState, {
-      type: initializePlayers.fulfilled.type,
-      payload: { initialLife: 30, playerCount: 3 },
+    const actual = playersReducer(initialState, {
+      type: 'InitializePlayers',
+      initialInfo: { initialLife: 30, playerCount: 3 },
     });
     expect(actual.allIds.length).toBe(3);
     expect(actual.allIds.includes('player1')).toBeTruthy();
@@ -156,9 +149,9 @@ describe('player reducer', () => {
   });
 
   it('プレイヤー情報の初期化 - 4人', () => {
-    const actual = playerReducer(initialState, {
-      type: initializePlayers.fulfilled.type,
-      payload: { initialLife: 20, playerCount: 4 },
+    const actual = playersReducer(initialState, {
+      type: 'InitializePlayers',
+      initialInfo: { initialLife: 20, playerCount: 4 },
     });
     expect(actual.allIds.length).toBe(4);
     expect(actual.allIds.includes('player1')).toBeTruthy();
@@ -201,64 +194,67 @@ describe('player reducer', () => {
   });
 
   it('ライフの増加', () => {
-    const actual = playerReducer(
-      initialState,
-      incrementLife({ amount: 1, targetPlayerId: 'player2' })
-    );
+    const actual = playersReducer(initialState, {
+      type: 'IncrementLife',
+      damageInfo: { amount: 1, targetPlayerId: 'player2' },
+    });
     expect(actual.byId['player2']?.life).toBe(21);
   });
 
   it('ライフの減少', () => {
-    const actual = playerReducer(
-      initialState,
-      incrementLife({ amount: -2, targetPlayerId: 'player3' })
-    );
+    const actual = playersReducer(initialState, {
+      type: 'IncrementLife',
+      damageInfo: { amount: -2, targetPlayerId: 'player3' },
+    });
     expect(actual.byId['player3']?.life).toBe(28);
   });
 
   it('統率者ダメージの増加', () => {
-    const actual = playerReducer(
-      initialState,
-      incrementCommanderDamage({
+    const actual = playersReducer(initialState, {
+      type: 'IncrementCommanderDamage',
+      damageInfo: {
         amount: 1,
         targetPlayerId: 'player2',
         opponentId: 'player1',
-      })
-    );
+      },
+    });
     expect(
       actual.byId['player2']?.commanderDamages.byId['player1']?.damage
     ).toBe(3);
   });
 
   it('統率者ダメージの減少', () => {
-    const actual = playerReducer(
-      initialState,
-      incrementCommanderDamage({
+    const actual = playersReducer(initialState, {
+      type: 'IncrementCommanderDamage',
+      damageInfo: {
         amount: -2,
         targetPlayerId: 'player3',
         opponentId: 'player1',
-      })
-    );
+      },
+    });
     expect(
       actual.byId['player3']?.commanderDamages.byId['player1']?.damage
     ).toBe(1);
   });
 
   it('統率者ダメージのリセット', () => {
-    const actual = playerReducer(
-      initialState,
-      resetCommanderDamage({
+    const actual = playersReducer(initialState, {
+      type: 'ResetCommanderDamage',
+      resetInfo: {
         targetPlayerId: 'player3',
         opponentId: 'player1',
-      })
-    );
+      },
+    });
     expect(
       actual.byId['player3']?.commanderDamages.byId['player1']?.damage
     ).toBe(0);
   });
 
   it('昇殿の切り替え', () => {
-    const actual = playerReducer(initialState, toggleAscend('player2'));
+    const actual = playersReducer(initialState, {
+      type: 'ToggleAscend',
+      targetPlayerId: 'player2',
+    });
     expect(actual.byId['player1']?.isAscend).toBeTruthy();
     expect(actual.byId['player2']?.isAscend).toBeTruthy();
     expect(actual.byId['player3']?.isAscend).toBeFalsy();
