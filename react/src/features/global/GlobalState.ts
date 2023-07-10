@@ -1,5 +1,5 @@
 import { Reducer } from 'react';
-import { PlayerId } from '../player/PlayerSlice';
+import { PlayerId } from '../player/PlayersState';
 
 export interface GlobalState {
   monarchPlayerId: PlayerId | null;

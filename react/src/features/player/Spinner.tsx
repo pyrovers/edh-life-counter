@@ -1,32 +1,34 @@
-import { FC } from 'react';
-import { useAppDispatch } from '../../app/hooks';
+import { FC, useContext } from 'react';
 import { IconButton } from '../../components/IconButton';
 import { Ripple } from '../../components/Ripple';
-import { incrementLife, PlayerId } from './PlayerSlice';
 import styles from './Spinner.module.css';
+import { PlayersDispatchContext } from './PlayersProvider';
+import { PlayerId } from './PlayersState';
 
 type Props = {
   step: 1 | 5 | 10;
   playerId: PlayerId;
 };
 export const Spinner: FC<Props> = ({ ...props }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useContext(PlayersDispatchContext);
 
   const onClickIncrement = () =>
-    dispatch(
-      incrementLife({
+    dispatch({
+      type: 'IncrementLife',
+      damageInfo: {
         amount: props.step,
         targetPlayerId: props.playerId,
-      })
-    );
+      },
+    });
 
   const onClickDecrement = () =>
-    dispatch(
-      incrementLife({
+    dispatch({
+      type: 'IncrementLife',
+      damageInfo: {
         amount: -props.step,
         targetPlayerId: props.playerId,
-      })
-    );
+      },
+    });
 
   return (
     <>

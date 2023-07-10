@@ -1,4 +1,12 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "react-app", "react-app/jest"]
+  "extends": ["eslint:recommended", "react-app", "react-app/jest"],
+  "rules": {
+    "no-redeclare": [
+      "error",
+      {
+        "ignoreDeclarationMerge": true
+      }
+    ]
+  }
 }

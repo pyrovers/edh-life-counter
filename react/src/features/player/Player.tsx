@@ -1,15 +1,7 @@
-import { FC } from 'react';
-import {
-  changeInitiativePlayer,
-  changeMonarchPlayer,
-  selectDayOrNight,
-  selectInitiativePlayerId,
-  selectMonarchPlayerId,
-} from '../global/GlobalSlice';
-import { PlayerData, toggleAscend } from './PlayerSlice';
+import { PropsWithoutRef, useContext } from 'react';
+import { PlayerData } from './PlayersState';
 import { Spinner } from './Spinner';
 import styles from './Player.module.css';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { IconButton } from '../../components/IconButton';
 import { CommanderDamages } from './commanderDamages/CommanderDamages';
 import { Ripple } from '../../components/Ripple';
@@ -18,27 +10,35 @@ import { EnergyCounter } from './energyCounter/EnergyCounter';
 import { ManaCounter } from './manaCounter/ManaCounter';
 import { CommanderACastCounter } from './commanderACastCounter/CommanderACastCounter';
 import { CommanderBCastCounter } from './commanderBCastCounter/CommanderBCastCounter';
+import { GlobalContext, GlobalDispatchContext } from '../global/GlobalProvider';
+import { PlayersDispatchContext } from './PlayersProvider';
 
-type Props = {
+type PlayersProps = {
   player: PlayerData;
   playerCount: number;
 };
-export const Player: FC<Props> = ({ ...props }) => {
-  const monarchPlayerId = useAppSelector(selectMonarchPlayerId);
-  const initiativePlayerId = useAppSelector(selectInitiativePlayerId);
-  const dayOrNight = useAppSelector(selectDayOrNight);
-  const dispatch = useAppDispatch();
+export const Player = ({ ...props }: PropsWithoutRef<PlayersProps>) => {
+  const { monarchPlayerId, initiativePlayerId, dayOrNight } =
+    useContext(GlobalContext);
+  const globalDispatch = useContext(GlobalDispatchContext);
+  const playerDispatch = useContext(PlayersDispatchContext);
 
   const onClickChangeMonarch = () => {
-    dispatch(changeMonarchPlayer(props.player.id));
+    globalDispatch({
+      type: 'ChangeMonarchPlayer',
+      monarchPlayerId: props.player.id,
+    });
   };
 
   const onClickChangeInitiative = () => {
-    dispatch(changeInitiativePlayer(props.player.id));
+    globalDispatch({
+      type: 'ChangeInitiativePlayer',
+      initiativePlayerId: props.player.id,
+    });
   };
 
   const onClickToggleAscend = () => {
-    dispatch(toggleAscend(props.player.id));
+    playerDispatch({ type: 'ToggleAscend', targetPlayerId: props.player.id });
   };
 
   return (

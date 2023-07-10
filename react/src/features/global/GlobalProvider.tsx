@@ -1,12 +1,8 @@
 import { Dispatch, PropsWithChildren, createContext, useReducer } from 'react';
-import {
-  GlobalActions,
-  globalReducer,
-  initialGlobalState,
-} from './GlobalState';
+import { GlobalAction, globalReducer, initialGlobalState } from './GlobalState';
 
 export const GlobalContext = createContext({ ...initialGlobalState });
-export const GlobalDispatchContext = createContext<Dispatch<GlobalActions>>(
+export const GlobalDispatchContext = createContext<Dispatch<GlobalAction>>(
   () => {}
 );
 

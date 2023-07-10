@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { FC, useContext } from 'react';
 import { IconButton } from '../../../components/IconButton';
 import { Ripple } from '../../../components/Ripple';
 import { useLongPress } from '../../../hooks/useLongPress';
@@ -9,12 +8,13 @@ import {
   resetPoisonCount,
   selectPoisonCount,
 } from '../PlayerSlice';
+import { PlayersDispatchContext } from '../PlayersProvider';
 
 type Props = {
   playerId: PlayerId;
 };
 export const PoisonCounter: FC<Props> = ({ ...props }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useContext(PlayersDispatchContext);
 
   const poisonCount = useAppSelector((state) =>
     selectPoisonCount(state, props.playerId)
